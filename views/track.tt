@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+ <html>
+
+<head>
+<meta charset="UTF-8">
+<!-- google API key for map -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+      
+
+<body>
+
+
+<div id='messageBlock' style='min-height: 50px; padding:10px; margin: 20px; border: 1px solid black'>
+    <h2>Messages from Beyond:</h2>
+    <div id='messageResults'></div>    <!-- Nothing in this div.  Yet. -->
+</div>
+
+
+<script>
+
+
+$(document).ready( function() {
+  var timer = setInterval(
+    function() {
+      $.ajax({
+        url: '/treck',
+        type: 'GET',
+        success: function(data) {
+           // Update the DOM
+           $('#messageResults').html(data.message);
+        },
+        error: function(event, stat, error) {
+          // throw a message into the browser's developer console
+          var str = 'Request failed. Status: ' + stat + ' Error: ' + error;
+          console.log(str);
+        },
+      });
+    },
+ 3000);    // in milliseconds.
+});
+
+
+</script>
+</body> 
+</html>
+

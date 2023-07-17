@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+[%# IF session.logged_in %]
+<head>
+<meta charset="UTF-8">
+
+        <script
+                src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&libraries=drawing&language==uk&libraries=places&callback=initMap" async defer></script>
+
+<style>
+#map {
+  height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ }
+   .fixedbut {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;	
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    }
+   #floating-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; 
+    z-index: 5;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   #floating-panel:hover {
+    background: #222;
+    }
+  .delete-menu {
+   position: absolute;
+   background: white;
+   padding: 3px;
+   color: #666;
+   font-weight: bold;
+   border: 1px solid #999;
+   font-family: sans-serif;
+   font-size: 12px;
+   box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.3);
+   margin-top: -10px;
+   margin-left: 10px;
+   cursor: pointer;
+   }
+
+  .delete-menu:hover {
+   background: #eee;
+  }
+   #floating-help {
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding-top: 0;
+    font-size: 17px;
+    }
+</style>
+
+	</head>
+[% IF session.logged_in %]
+<body>
+<!--<form id="track_map" action="/edit_map" method=post>-->
+
+    <div id="floating-panel">
+      <input id="remove-line" class="btn btn-warning btn-sm" type="button" value="Видалити" />
+      <input id="add-line" class="btn btn-primary btn-sm" type="button" value="Відновити" />
+    </div>
+
+<div id="map"></div>
+<form id="track_map" action="/edit_map" method=post>
+
+<script>
+
+var route_LatLng = [];
+var points =[];
+let flightPath;
+let map;
+var mss = [];
+
+function initMap() {
+
+let mas = [];
+let lines_sum = [];
+var a = 0;
+var i = 0;
+[% FOREACH i = hash %]
+        mas[a] = [% i %]
+        a = a +1;
+[% END %]
+
+var a = 0;
+[% FOREACH i = lines %]
+        lines_sum[a] = [% i %]
+        a = a +1;
+[% END %]
+
+     mss = JSON.parse(JSON.stringify(mas));
+var lines_ss = JSON.parse(JSON.stringify(lines_sum));
+
+
+// Отримуємо межі (границі) всіх маркерів
+var bounds = new google.maps.LatLngBounds();
+mss.forEach(function(mss) {
+  bounds.extend(new google.maps.LatLng(mss.lat, mss.lng));
+});
+
+// Отримуємо центр меж
+var center = bounds.getCenter();
+
+var element = document.getElementById("map");
+var options = {
+        zoom: 13,
+        center: center //latlng,
+};
+
+map = new google.maps.Map(element, options);
+
+
+  const flightPathCoordinates = [];
+
+for (i = 0; i < lines_ss.length; i += 1) {
+    flightPathCoordinates.push(new google.maps.LatLng(lines_ss[i].lat, lines_ss[i].lng));
+}
+
+  flightPath = new google.maps.Polyline({
+    path: flightPathCoordinates,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 5,
+	editable: true,
+	  closed: false,
+  });
+
+flightPath.setMap(map);
+var path = flightPath.getPath();
+        google.maps.event.addListener(map, "click", function(event) {
+                        var points_summ = path.push(event.latLng);
+                         points = flightPath.getPath().getArray();
+			route_LatLng = JSON.stringify(points) ;
+
+//var point_summ_s = JSON.stringify(points_summ) ;
+//		console.log(point_summ_s);
+//		console.log(route_LatLng);
+
+		document.getElementById("fech-point").addEventListener("click", fetch_point);
+
+});
+                function fetch_point() {
+                                console.log(route_LatLng);
+                        fetch('/edit_map', {
+                                method: "POST",
+                                body: JSON.stringify(points),
+ 	});
+};
+
+ /**
+   * A menu that lets a user delete a selected vertex of a path.
+   */
+  class DeleteMenu extends google.maps.OverlayView {
+    div_;
+    divListener_;
+    constructor() {
+      super();
+      this.div_ = document.createElement("div");
+      this.div_.className = "delete-menu";
+      this.div_.innerHTML = " Видалити ";
+
+      const menu = this;
+
+      google.maps.event.addDomListener(this.div_, "contextmenu", () => {
+        menu.removeVertex();
+      });
+    }
+    onAdd() {
+      const deleteMenu = this;
+      const map = this.getMap();
+
+      this.getPanes().floatPane.appendChild(this.div_);
+      // mousedown anywhere on the map except on the menu div will close the
+      // menu.
+      this.divListener_ = google.maps.event.addDomListener(
+        map.getDiv(),
+        "mousedown",
+        (e) => {
+          if (e.target != deleteMenu.div_) {
+            deleteMenu.close();
+          }
+        },
+        true
+      );
+    }
+    onRemove() {
+      if (this.divListener_) {
+        google.maps.event.removeListener(this.divListener_);
+      }
+
+      this.div_.parentNode.removeChild(this.div_);
+      // clean up
+      this.set("position", null);
+      this.set("path", null);
+      this.set("vertex", null);
+    }
+    close() {
+      this.setMap(null);
+    }
+    draw() {
+      const position = this.get("position");
+      const projection = this.getProjection();
+
+      if (!position || !projection) {
+        return;
+      }
+
+      const point = projection.fromLatLngToDivPixel(position);
+
+      this.div_.style.top = point.y + "px";
+      this.div_.style.left = point.x + "px";
+    }
+    /**
+     * Opens the menu at a vertex of a given path.
+     */
+    open(map, path, vertex) {
+      this.set("position", path.getAt(vertex));
+      this.set("path", path);
+      this.set("vertex", vertex);
+      this.setMap(map);
+      this.draw();
+    }
+    /**
+     * Deletes the vertex from the path.
+     */
+    removeVertex() {
+      const path = this.get("path");
+      const vertex = this.get("vertex");
+
+      if (!path || vertex == undefined) {
+        this.close();
+        return;
+      }
+
+      path.removeAt(vertex);
+      this.close();
+    }
+}
+
+  const deleteMenu = new DeleteMenu();
+
+  google.maps.event.addListener(flightPath, "contextmenu", (e) => {
+    // Check if click was on a vertex control point
+    if (e.vertex == undefined) {
+      return;
+    }
+
+    deleteMenu.open(map, flightPath.getPath(), e.vertex);
+  });
+
+
+  // add event listener for click event   window.initialize = initMap;
+  document.getElementById("add-line").addEventListener("click", addLine);
+  document.getElementById("remove-line").addEventListener("click", removeLine);
+  // initialize with line
+  addLine();
+
+
+var markers = [];
+for (var i = 0; i<= mss.length; i++)
+
+        {
+
+         markers[i] = new google.maps.Marker({
+                position: new google.maps.LatLng(mss[i].lat, mss[i].lng),
+                title: mss[i].name,
+                map: map,
+                buborek: mss[i].name,
+                icon: '/images/bus2_stops.png',
+        });
+
+                // Центр карти
+//                var markerPosition = new google.maps.LatLng(mss[i].lat, mss[i].lng);
+                // Добавляемо координати маркера в область
+//                mssBounds.extend(markerPosition);
+                //map.setCenter(mssBounds.getCenter(), map.fitBounds(mssBounds));
+//                map.fitBounds(mssBounds);
+
+        }
+
+}
+
+function addLine() {
+  	flightPath.setMap(map);
+}
+
+function removeLine() {
+ 	flightPath.setMap(null);     
+ 	points =[];		    
+}
+
+</script>
+
+
+<div class="fixedbut">
+	<!--<input id="fech-point" class="btn btn-warning btn-sm" type="buton" value="Зберегти" />-->
+		<input id="fech-point" class="btn btn-primary btn-sm" type="submit" value="Зберегти">
+                <input type="hidden" id="track_map" name="track_map" value="1">
+		<a href="/" class="btn btn-warning btn-sm">Вихід</a>
+	
+	
+
+</div>
+
+ </form>
+</body>
+[% ELSE %]
+
+
+		<div id="floating-help" class="d-flex align-items-center">
+			<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false"> 
+ 				<div class="toast-header">
+
+					<div class="rounded me-2">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg> 
+					</div>
+
+                        <strong class="me-auto">Довідка</strong>
+                        <small>Друк мапи</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        			</div>
+				<div class="toast-body">
+          На екрані приклад прорамно-створеної мапи.
+        Вам лишається лише видати на друк дане зображення маршруту.
+        Для вирішення шляхів використання системи МАК-ОМ Вам необхідно відправити реестраційні дані.  
+	    			<div class="mt-2 pt-2 border-top">
+ 	<a href="[% logout_url %]" type="button" class="btn btn-warning btn-sm">Реестрація</a>
+      	<a href="[% logout_url %]" type="button" class="btn btn-dark btn-sm">Вихід</a>
+    				</div>
+                       </div>
+ 		</div>
+	</div>
+
+ <script>
+
+window.onload = (event) => {
+  let myAlert = document.querySelectorAll('.toast')[0];
+  if (myAlert) {
+    let bsAlert = new bootstrap.Toast(myAlert);
+    bsAlert.show();
+  }
+};
+
+ </script>
+
+		<img src="/images/52.png" class="d-block w-100" alt="...">
+
+[% END %]
+
+</html>
+
+

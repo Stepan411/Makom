@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+	<div class="vh-100 p-3" style="background-color: #eee;">
+
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+			<dl>
+			<dd>
+			<h1><span class="mak-color">мак</span>-oм<span class="menu-color">: Вхід в систему</span></h1>
+
+			</dd>
+[% IF err %]<p class=error><strong>Помилка:</strong> [% err %]</p>[% END %]
+		<form action="[% login_url %]" method=post autocomplete="on">
+  			
+    			 <dt>Логін:
+    			 <dd><input type=text name=username>
+    			 <dt>Пароль:
+    			 <dd><input type=password name=password>
+
+	<center><h2><p class="bg-success text-white">[% msg %]</p></h2></center>
+
+	<div class="footer-login">
+    	<!--		 <dd><input class="btn btn-primary" type="submit" value="Вхід">  -->
+<dd><input class="btn btn-primary" type="submit" value="  Вхід  ">
+		<a href="[% logout_url %]" class="btn btn-outline-primary">Вихід</a> 
+
+ 	</div>
+			</dl>
+		</form>
+</div>
+</div>
+</body>
+</html>
+

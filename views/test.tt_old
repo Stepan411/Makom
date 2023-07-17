@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<title>Creating and Using an InfoBox</title>
+
+ <style type="text/css">
+
+	#map { width: 100%; height: 400px; }
+  .labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     width: 40px;
+     border: 2px solid black;
+     white-space: nowrap;
+   }
+ </style>
+
+</head>
+<body>
+<body>
+<div id='map'></div>
+
+<script type="text/javascript"> 
+
+  function initMap()
+
+{
+
+alert('1234'); 
+//var map;
+var latlng = { lat: 50.74520809060286, lng: 25.319942873915547 };
+
+var element = document.getElementById("map");
+var options = {
+        zoom: 14,
+        center: latlng,
+};
+var map = new google.maps.Map(element, options);
+
+//new markerWithLabel.MarkerWithLabel();
+        // Область показу маркерів для центрування карти
+//        var mssBounds = new google.maps.LatLngBounds();
+
+}
+
+
+//     var marker1 = new markerWithLabel.MarkerWithLabel({
+//       position: homeLatLng,
+//       draggable: true,
+//       raiseOnDrag: true,
+//       map: map,
+//       labelContent: "$425K",
+//       labelAnchor: new google.maps.Point(22, 0),
+//       labelClass: "labels", // the CSS class for the label
+//       labelStyle: {opacity: 0.75}
+//     });
+
+//     var iw1 = new google.maps.InfoWindow({
+//       content: "Home For Sale"
+//     });
+//     google.maps.event.addListener(marker1, "click", function (e) { iw1.open(map, this); });
+
+
+
+
+</script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&libraries=drawing$callback=initMap>
+        </script>
+
+	<p>
+ffffffffffffff ggggggggggggggggggg gggggggggggggggg.
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+[%# IF session.logged_in %]
+<form action="/general_indicators" method="post" accept-charset="utf-8">
+ <head>
+
+<style>
+
+
+
+   table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+   }
+   td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid #000; /* Параметры рамки */
+   }
+   .my_ss, th {
+    background: #afd792; /* Цвет фона */
+    color: #333;  /* Цвет текста */
+   }
+    tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+   }
+
+   .fixedbut {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    }
+textarea,
+input{
+    display: block;
+    text-align: center;
+}
+
+</style>
+   <!--<div class="h-25 d-inline-block p-3" style="background-color: #eee">
+
+   -->
+</head>
+<body>
+
+<div class="vh-100" style="background-color: #eee">
+
+
+	<center>
+<div class="w-75 p-3">
+
+
+	<center><h6 class="display-6">Загальні показники</h6></center>
+
+<table>
+
+<div class="fixedbut">
+<input class="btn btn-primary" type="submit" value="Відправити">
+<a href="/" class="btn btn-warning">Вихід</a>
+</div>
+[% z  = max_id - passport.3 %]
+
+ <tr class="my_ss">
+        <th rowspan="2"><center>№ п/п</center><th rowspan="2"><center>Найменування показників </center></th><th colspan="5"><center>Кількість показнків</center></th>
+
+
+ </tr>
+ <tr class="my_ss">
+                <th><center>прямий напрямок</center></th><th><center>зворотній нарямок</center></th>
+ </tr>
+   <tbody>
+        <tr>
+        <td><center>1</center></td><td> Довжна маршруту, км. </td><td><center>[% char_rout.1 %]</center></td><td><center>[% char_rout.2 %]</center></td>
+       </tr>
+        <tr>
+        <td><center>2</center></td><td> Тривалість рейсу, год. хв.</td><td><center>[% char_rout.3 %]</center></td><td><center>[% char_rout.4 %]</center></td>
+       </tr>
+        <tr>
+        <td><center>3</center></td><td> Зупинки проміжні, кількість</td><td><center>[% passport.3 %]</center></td><td><center>[% z %]</center></td>
+       </tr>
+         <tr>
+        <td><center>4</center></td><td> Автостанції, кількість</td><td><center>[% sum_avto_stops_dir %]</center></td><td><center>[% sum_avto_stops_rev %]</center></td>
+       </tr>
+         <tr>
+        <td><center>5</center></td><td> Диспетчерські та контрольні пункти<br>
+					(місця розташування)<br>
+					<textarea class="form-control" name="control_points" rows="2" id="control_points"  placeholder="[% char_rout.9 %]"></textarea>
+					</td><td><center>
+					<textarea class="form-control" name="control_points_dir" rows="4" id="control_points_dir"  placeholder="[% char_rout.8 %]"></textarea>
+					</center></td><td><center>
+					<textarea class="form-control" name="control_points_rev" rows="4" id="control_points_rev"  placeholder="[% char_rout.7 %]"></textarea>
+					</center></td>
+       </tr>
+       <tr>
+        <td><center>6</center></td><td> Наявність облаштованих майданчиків<br>
+					для розвороту автобусів у кінцевих<br> 
+					пунктах маршруту<br>
+					(для міських маршрутів)
+									</td><td><center>[% equipped_sites_dir %]</center></td><td><center>[% equipped_sites_rev %]</center></td>
+       </tr>
+
+</form>
+
+   </tbody>
+  </table>
+
+
+</div>
+
+</center>
+</div>
+
+ </body>
+[%# END %]
+</form>
+</html>
+
+
+
+
+

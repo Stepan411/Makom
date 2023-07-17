@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps & D3.js Example</title>
+    <style>
+ #map { height: 700px; }
+
+ 
+      #slider {
+        margin-top: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="values-slider"></div>
+    <div id="slider"></div>
+    <!--
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&language=uk&callback=initMapi"></script>
+
+<script src="/javascripts/nouislider.min.js"></script>
+<link href="/css/nouislider.min.css" rel="stylesheet">
+<div class="noUiSlider"></div><br>
+    <script>
+      // Initialize the Google Map
+      function initMap() {
+
+var arr2 = [];
+[% FOREACH stop2 IN track %]
+    var obj2 = {};
+  obj2.num_next_segment = [% stop2.num_next_segment %],
+  obj2.lng = [% stop2.lng %],
+  obj2.id_station = [% stop2.id_station %],
+  obj2.id = [% stop2.id %],
+//  obj2.distance_stops = [% stop2.distance_stops %],
+  obj2.radio_pzz = [% stop2.radio_pzz %],
+  obj2.distance_line = [% stop2.distance_line %],
+  obj2.lat = [% stop2.lat %],
+//  obj.distance_line_two = [% stop2.distance_line_two %],
+
+    arr2.push(obj2);
+
+                [% END %]
+
+var track_ss = arr2;
+
+
+
+
+	      var valuesSlider = document.getElementById('values-slider');
+var valuesForSlider = [0,1,2,3,4,5,6,7,8,10,12,14,16,20]; // 16 values
+
+var format = {
+    to: function(value) {
+        return valuesForSlider[Math.round(value)];
+    },
+    from: function (value) {
+        return valuesForSlider.indexOf(Number(value));
+    }
+};
+
+noUiSlider.create(valuesSlider, {
+    start: [8, 24],
+    // A linear range from 0 to 15 (16 values)
+    range: { min: 0, max: valuesForSlider.length - 1 },
+    // steps of 1
+    step: 1,
+    tooltips: true,
+    format: format,
+    pips: { mode: 'steps', format: format },
+});
+
+// The display values can be used to control the slider
+valuesSlider.noUiSlider.set(['4', '12']);
+var values = valuesSlider.noUiSlider.get();
+console.log(values);
+
+valuesSlider.noUiSlider.on('update', function(values, handle) {
+  var currentValue = valuesSlider.noUiSlider.get();
+  console.log(currentValue);
+});
+/*
+	const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 50.7568376183486, lng: 25.3450718375684 },
+          zoom: 13,
+        });
+*/    
+
+var track_line = [];
+var a = 0;
+[% FOREACH i = track_l %]
+        track_line[a] = [% i %]
+        a = a +1;
+[% END %]
+var track_line_ss = JSON.stringify(track_line);   	// рядкове значеення
+track_line_ss = JSON.parse(track_line_ss);		// обєкт
+const path_vv = track_line_ss.map(coord => ({		// перетворюєм в числове
+  lat: Number(coord.lat),
+  lng: Number(coord.lng)
+}));
+
+console.log(track_line_ss);
+
+
+ const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 50.7568376183486, lng: 25.3450718375684 },
+    zoom: 13,
+    mapTypeId: "terrain",
+  });
+  // Define the symbol, using one of the predefined paths ('CIRCLE')
+  // supplied by the Google Maps JavaScript API.
+  const lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: "#393",
+  };
+
+//var pach1 = path;
+
+// Create the polyline and add the symbol to it via the 'icons' property.
+  const line = new google.maps.Polyline({
+    path: path_vv,
+    icons: [
+      {
+        icon: lineSymbol,
+        offset: "100%",
+      },
+    ],
+    map: map,
+  });
+
+  animateCircle(line);
+}
+
+// Use the DOM setInterval() function to change the offset of the symbol
+// at fixed intervals.
+function animateCircle(line) {
+  let count = 0;
+
+  window.setInterval(() => {
+    count = (count + 0.001) % 200;
+
+    const icons = line.get("icons");
+    icons[0].offset = count/2 + "%";
+	  console.log('ds=' +icons[0].offset, count);
+
+    line.set("icons", icons);
+  }, 20);
+
+
+
+
+}
+initMap();
+    </script>
+   </body>
+</html>
+

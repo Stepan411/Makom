@@ -1,0 +1,421 @@
+#!/usr/bin/env perl
+
+use POSIX qw(strftime);
+use strict;
+use warnings;
+use Exporter;
+use Switch;
+use Data::Dumper;
+use FindBin;
+use DBI;
+use feature qw(fc say);
+use Excel::Writer::XLSX;
+binmode(STDOUT,':utf8');
+use utf8;
+use open qw(:utf8 :std);
+
+my $rout_writhe = 30;           # маршрут вводити ( допустимо 30 )
+our $stations_id = 198;		# зупинка id вводити
+our $stations_id2 = 332;
+our $station_2 =0;
+my $stations_name = ();
+our @table = ();  
+our $table = ();
+our @schedules_our = ();
+our @graphs = ();
+my @row_ref =();
+my @workshift = ();
+our @mass = ();
+our @mass_stations = ();
+#our ($sec,$min,$hour);
+our ($i, $j, $t, $schedules_max, $sec, $min, $hour, $flig_max);  
+
+  my $dbh = DBI->connect('DBI:mysql:makom', 'vizor', 'MBfhSg^4h5b%g3K'
+                   ) || die "Could not connect to database: $DBI::errstr";
+$dbh->{mysql_enable_utf8} = 1;
+$dbh->do('set names "UTF8"');
+#--------- -------------- ----------- ------------------------------
+my $sth = $dbh->prepare("SELECT id, routes, routes_id, graphs, graphs_id, val_select_direct, val_select_twisted  
+FROM passport WHERE id = 1");
+#my $sql = $$dbh->prepare('select id, routes, name_directions from passport where id=1');
+        $sth->execute or die $sth->errstr;
+        my @passport = $sth->fetchrow_array;
+        $sth->finish;
+	$stations_id = $passport[5]; 
+	$stations_id2 = $passport[6];
+	$rout_writhe = $passport[1];
+#--------- -------------- Маршрут id ------------------------------
+$sth = $dbh->prepare("SELECT id, transport_types_id, name
+FROM routes WHERE name = $rout_writhe");
+        $sth->execute();
+        my $routes = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+        for $i ( 0 .. $#{$routes} ) {
+        for $j ( 0 .. $#{$routes->[$i]} )  {
+#print "routes=$routes->[$i][$j]\t";
+}
+#print "routes=$routes->[$i][$j]\t";
+#print "Маршрут=$routes->[0][2] \n";
+}
+#--------- -------------- Назва маршруту ------------------------------
+$sth = $dbh->prepare("SELECT name
+FROM route_directions WHERE routes_id = $routes->[0][0]");
+        $sth->execute();
+        my $directions = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+        for $i ( 0 .. $#{$directions} ) {
+        for $j ( 0 .. $#{$directions->[$i]} )  {
+}
+#print "$directions->[$i][0] \n";
+}
+#--------- -------------- Назви (Номера) графіків ------------------------------
+$sth = $dbh->prepare("SELECT id, name
+FROM graphs WHERE routes_id = $routes->[0][0]"); # AND (name = $graph_writhe)");
+        $sth->execute();
+        my $graphs = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+        for $i ( 0 .. $#{$graphs} ) {
+        for $j ( 0 .. $#{$graphs->[$i]} )  {
+#print "Графік=$graphs->[$i][1] \n";
+}
+#print "Графік=$graphs->[$i][1], graphs->[$i][0]=$graphs->[$i][0] \n";
+}
+#--------- -------------- Графіки (ID графіка) ------------------------------
+	our $x=0;
+for $x ( 0 .. $#{$graphs} ) {
+
+$sth = $dbh->prepare("SELECT MAX(id) FROM schedules WHERE (graphs_id = $graphs->[$x][0]) AND ($routes->[0][2])");
+        $sth->execute();
+        my $schedules = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+        for $i ( 0 .. $#{$schedules} ) {
+        for $j ( 0 .. $#{$schedules->[$i]} )  {
+}
+#print "Графік=$schedules->[$i][0] \n";
+	$schedules_max = $schedules->[$i][0];
+	push @schedules_our, $schedules->[$i][0];
+}
+}
+#--------- -------------- Шахматка ------------------------------
+#$dbh->do ("CREATE TABLE IF NOT EXISTS report_chess
+#        (id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#        schedules_id  mediumint(8) NOT NULL,
+#        graphs_nom smallint(5) NOT NULL,
+#        workshift_nom smallint(5) NOT NULL,
+#        flights_number smallint(5) NOT NULL,
+#        time mediumint(8) NOT NULL, помилка в типы даних
+#        stations_id mediumint(8) NOT NULL,
+#        name varchar(100) NOT NULL) ENGINE=MyISAM CHARSET=utf8" ) or
+#    die "Cannot prepare: " . $dbh->errstr ();
+
+        my $workbook  = Excel::Writer::XLSX->new('report_chess.xlsx');
+        die "Problems creating new Excel file: $!" unless defined $workbook;
+        my $worksheet = $workbook->add_worksheet();
+        $worksheet->hide_gridlines(1);
+        for $worksheet ( $workbook->sheets() ) {
+        $worksheet->set_landscape();
+}
+$worksheet->set_portrait();    # Portrait mode
+$worksheet->set_margin_top(0.5);        # по центру
+$worksheet->set_column('A:Z', 3.7);
+$worksheet->set_margins_LR(0.18);  # Відступи = 0.2x25.4mm
+$worksheet->set_row( 0, 5 );    # Row 1 height set to 20
+$worksheet->set_row( 1, 5 );    # Row 1 height set to 20
+        my $r = ();
+for $r (8..100 ){
+        $worksheet->set_row( $r, 11 )
+}
+        my %center10 = ();
+        my %font10 = ();
+        my %font0    = (
+                font  => 'Arial',
+                size  => 6,
+                color => 'black',
+ 
+               bold  => 0,
+                text_wrap => 1,
+              );
+%font10    = (
+                font  => 'Arial',
+                size  => 14,
+                color => 'black',
+                bold  => 1,
+              );
+my %font11    = (
+                font  => 'Arial',
+                size  => 9,
+                color => 'black',
+                bold  => 0,
+              );
+my %font13    = (
+                font  => 'Arial',
+                size  => 9,
+                color => 'black',
+                bold  => 1,
+              );
+my %font14    = (
+                font  => 'Arial',
+                size  => 8,
+                color => 'black',
+                bold  => 0,
+              );
+my %font15    = (
+                font  => 'Arial',
+                size  => 8,
+                color => 'black',
+                bold  => 0,
+              );
+my %center6   = (
+                top     => 6,
+                bottom  => 6,
+                left    => 1,
+                valign  => 'vcenter',
+                align   => 'centr',
+              );
+%center10   = (
+                border  => 0,
+                valign  => 'vcenter',
+                align   => 'center',
+              );
+my %center11   = (
+                border  => 1,
+                valign  => 'vcenter',
+                align   => 'center',
+               );
+my %center12   = (
+                border  => 6,
+                valign  => 'vcenter',
+                align   => 'center',
+               );
+my $format10 = $workbook->add_format(%font10, %center10);
+my $format16 = $workbook->add_format(%font13, %center10);
+my $format13 = $workbook->add_format(%font11, %center11);
+my $format17 = $workbook->add_format(%font13, %center11);
+my $format18 = $workbook->add_format(%font14, %center11);
+my $format19 = $workbook->add_format(%font13, %center12);
+my $format20 = $workbook->add_format(%font15, %center11);
+
+#------------------------------ Хедер --------------------------------------------
+$worksheet->merge_range('C3:W4', "ШАХМАТКА РУХУ", $format10);
+$worksheet->merge_range('C5:W5', "M: $rout_writhe   Г: 1-$graphs->[-1][1]", $format10);
+	my $str=8;
+	$r = 6;
+STATION_2:{			# мітка організації другого циклу - другої зупинки
+	my $workshift_2 = 0;
+for $x ( 0 .. $#{$graphs} ) {
+	$i=$x;
+$sth = $dbh->prepare("SELECT id, schedules_id, time, flights_number, stations_id, pc_number
+FROM schedule_times WHERE schedules_id = $schedules_our[$i] ORDER BY stations_id");
+        $sth->execute();
+        $table = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+        for $i ( 0 .. $#{$table} ) {
+        for $j ( 0 .. $#{$table->[$i]} )  {
+	$table->[$i][6] = $graphs->[$x][1]; 
+}
+my $sth = $dbh->prepare("SELECT name FROM stations WHERE id = $table->[$i][4]");
+        $sth->execute();
+        my $row_ref = $sth -> fetchrow_arrayref
+        or die "$sth -> errstr\n";
+        $table->[$i][5] = $row_ref->[0];
+$sth = $dbh->prepare("SELECT number, end_time FROM workshift WHERE schedule_id = $table->[$i][1]");
+        $sth->execute();
+        my $workshift = $sth -> fetchall_arrayref
+        or die "$sth -> errstr\n";
+	$table->[$i][7]  = $workshift->[0][0];
+if ( defined($workshift->[1][0] )) {
+if ($table->[$i][2] >= $workshift->[0][1]){
+	$table->[$i][7]  = $workshift->[1][0];
+}
+}
+if ($station_2 == 2) {
+	$stations_id = $stations_id2;		# виборка другої зупинки для шахмутки
+}
+if ($table->[$i][4] == $stations_id){
+	$stations_name = $table->[$i][5];
+	push @mass, $table->[$i][2];		# створюється одномірний масив часу по заданому id зупинки
+	push @mass_stations, ($table->[$i][0], $table->[$i][1], $table->[$i][2], $table->[$i][3], $table->[$i][4], $table->[$i][5], $table->[$i][6], $table->[$i][7]);					# створюється масив інших полів заданої станції
+        ($sec,$min,$hour)=gmtime($table->[$i][2]);
+        $min = sprintf('%02d', $min);
+#print "min=$min";
+        $hour = sprintf('%02d', $hour);
+        $table->[$i][2] = join(":", $hour, $min);
+        $flig_max  = $table->[$i][3];                   # останій макс. рейс
+#print "0=$table->[$i][0], 1=$table->[$i][1], 2=$table->[$i][2], 3=$table->[$i][3], 4=$table->[$i][4], 5=$table->[$i][5],6=$table->[$i][6], зміна7=$table->[$i][7] \n";
+}
+}
+}
+#print "2=$table->[$i][2] \n";
+	my $size  = 0;
+	$size = $graphs->[-1][1];
+#print "xxx=$size\n";
+#	$i = 0;
+	my $mass = ();
+	@mass = sort(@mass);	# сортування масива (часу в сек.) по зростанню по даній зупинці
+#print "@mass\n";
+	my $c =2;
+#print "z1 str=$str, r=$r \n";
+if ($station_2 != 2) {
+$worksheet->merge_range('C6:W6', "$directions->[-1][0] зупинка: $stations_name", $format16);
+}else{
+#print "z2 str=$str, r=$r \n";
+$worksheet->merge_range($r, $c, $r, $c+20, "$directions->[-1][0] зупинка: $stations_name", $format16);
+$r++;
+}
+	my $flign_max = 7;
+	my $hoyr_N = 14400;
+ 	my $hoyr_s = 4;
+        $a=1;
+#print "z3 str=$str, r=$r \n";
+
+$worksheet->set_row( $r, 15 );
+$worksheet->set_row( $r+1, 15 );
+for $t ( 0 .. $#mass ) {
+	             while ($a <= $flign_max){       #
+                                $a++;
+$worksheet->merge_range($r, $c, $r, $c+2, " $hoyr_s год.", $format19);
+$worksheet->write($r+1, $c, 'Г/З', $format13);
+$worksheet->write($r+1, $c+1, 'Хв.', $format13);
+$worksheet->write($r+1, $c+2, 'Інт.', $format13);
+        $c=$c+3;
+	$hoyr_s++;
+}
+}
+#$worksheet = $workbook->add_worksheet();     # добавлення сторінки
+	my $col=2;
+	my $time=();
+	my $hoyr_N_time = ();
+	my $hoyr_N_time222 = ();
+	my $counter = 0;
+	my $counter_max = 0;
+	my $difference =0;
+	my $graph_change = ();
+	our $graph1 = 0;
+	our $change = 0;
+	our @mass_stat = ();
+	our $mass_stat = ();
+	@mass_stat = @mass_stations;	# перезаписую бо область видимості в майбутніх циклах відсутня.
+	$#mass_stations = -1;		# очистка мисиву
+       $size = $mass[-1];
+	#print "xxxxxx=$size\n";
+for $t ( 0 .. $#mass ) {		# виборка з @mass_stat даних: графіка та зміни по масиву @mass - це синхронізація даних
+
+for (my $i = 0; $i < @mass_stat ; $i++) {
+if ($mass[$t] eq $mass_stat[$i] ){
+#	our $graph1 = 22;
+#	our $change = 22;
+ 	$graph1 = sprintf('%01d', $mass_stat[$i+4]);
+	$change = sprintf('%01d', $mass_stat[$i+5]);
+push @mass_stations, ($graph1.$change);	# обєднання та добавлення даних
+#	print "@mass_stations\n";
+last
+}
+}
+}
+my $test = ();;
+	$i=0;
+for $t ( 0 .. $#mass ) {			# цикл друку
+# ($sec,$min,$hour)=gmtime($mass[$t]);
+#        $min = sprintf('%02d', $min);
+#        $hour = sprintf('%02d', $hour);
+#        $test = join(":", $hour, $min);
+
+	$graph_change = $mass_stations[$i];
+#	print "test=$test\n";
+	$i++;
+while ($hoyr_N <= $mass[$t]) {
+if ($hoyr_N+3600 > $mass[$t]){
+if ( defined($mass[$t+1])) {
+	$difference  = $mass[$t+1] - $mass[$t];		# різниця в сек. час муйбутній - час теперишній
+}
+	($sec,$min,$hour)=gmtime($difference);
+ 	$hour = sprintf('%02d', $hour);
+if ($hour != 0){
+	$difference = join(":", $hour, $min);
+}else{
+	$difference = $min;
+}
+  	($sec,$min,$hour)=gmtime($mass[$t]);
+        $min = sprintf('%02d', $min);
+	#print "min=$min, difference=$difference\n";
+$worksheet->write($str, $col, $graph_change, $format18);
+$worksheet->write($str, $col+1, $min, $format20);
+$worksheet->write($str, $col+2, $difference, $format18);
+	$str++;
+	#print "2 str=$str\n";
+	$counter++;
+if ($counter > $counter_max){
+	$counter_max = $counter;
+}
+last
+}
+	$hoyr_N = $hoyr_N + 3600; 		# переключення виводу на наступну год.
+	$col = $col+2;
+if ($col > 21){					# переключення друку на наступну стрічку
+	$col= 2;
+	$str = $str - $counter;
+	$str = $str + $counter_max;
+#print "str=$str, counter_max=$counter_max\n";
+	$str = $str+1;
+#print "3 str=$str\n";
+	$counter = 0;
+	$counter_max = 0;
+
+	$c=2;
+        $r=$str;
+#print "3 r=$r, str=$str\n";
+
+        my $flign_max = 7;
+#        my $hoyr_s = 4;
+$worksheet->set_row( $r, 15 );			# розширення колонок хедера
+$worksheet->set_row( $r+1, 15 );
+	$a=1;
+for $t ( 0 .. $#mass ) {
+                     while ($a <= $flign_max){       #
+                                $a++;
+$worksheet->merge_range($r, $c, $r, $c+2, " $hoyr_s год.", $format19);
+$worksheet->write($r+1, $c, 'Г/З', $format13);
+$worksheet->write($r+1, $c+1, 'Хв.', $format13);
+$worksheet->write($r+1, $c+2, 'Інт.', $format13);
+        $c=$c+3;
+        $hoyr_s++;
+}
+}
+	$str = $str+2;
+#print "4 str=$str\n";
+}else{
+	$col++;
+        $str = $str - $counter;
+#print "444 str=$str\n";
+        $counter = 0;
+}
+}
+}
+if ($stations_id2 != 0) { 	# якщо є 2 зупинка то підготовка змінних і масивів для 2 циклу
+if ($station_2 != 2){
+	$station_2 = 2;
+	$str = $str - $counter;
+        $str = $str + $counter_max;
+        $str++;
+	$r=$str;
+	$str= $str+3;
+#print "3333333333 str=$str\n";
+        $counter = 0;
+        $counter_max = 0;
+	$#mass_stations = -1;	# очистка масиву
+	$#mass_stat = -1;
+	$#mass_stations = -1;
+	$#table = -1;
+	$#mass = -1;
+	#print "777 str=$str, r=$r, counter$counter, counter_max=$counter_max \n";
+	redo STATION_2; 
+}else{
+	last
+}
+}
+} 
+$workbook->close();
+#print "@mass\n";
+$sth->finish;
+$dbh->disconnect;
+__END__

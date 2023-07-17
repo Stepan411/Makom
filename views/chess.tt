@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+[% IF session.logged_in %]
+	<form action="/chess" method="post" accept-charset="utf-8">
+ <head>
+
+<style>
+
+h5
+{
+    float: none;
+    text-align: right;
+}
+textarea,
+input{
+    display: block;
+    text-align: center;
+}
+
+.progress, .alert {
+    margin: 15px;
+}
+
+.alert {
+    display: none;
+}
+
+</style>
+
+
+</head>
+<body>
+	<div class="vh-100 p-3" style="background-color: #eee;">
+		<div>
+			<div>
+<center><h6 class="display-6">Шахматка маршруту:</h6></center>
+  <div class="col">
+	  <center><h4><a href="#">№ [% passport.1 %]  [% passport.2 %]</a></h4></center>
+
+  </div>
+         <section class="main-content">
+                   <div class="container">
+
+			      <div class="row">       
+                        <div class="col-md-6 col-sm-6">
+                          <div class="service-card"> 
+                                
+                                <div class="service-details">
+                               <center><h4><a href="#">Зупинка</a></h4></center>
+                               
+
+		<div class="form-group">
+  	<center><label for="comment">Прямий напрямок:</label></center>
+			<select class="form-select" aria-label=".form-select-lg example" name="val_select_direct">
+			
+[% FOREACH id IN stops.keys.nsort(num) %]
+[% IF 1 == stops.$id.radio_pzz  %]
+[% SET a = stops.$id.id %]
+  [% LAST %]1
+[% END %]
+					<option value="[% stops.$id.id_station | html %]"><li>[% stops.$id.id | html %]. [% stops.$id.name | html %]</option>
+[% END %]
+				</select>
+		</div>
+      </div>
+                  </div>
+                </div>
+                  
+      		<div class="col-md-6 col-sm-6">
+                           <div class="service-card">
+           			<div class="service-details">
+                                <center><h4><a href="#">Зупинка</a></h4></center>
+		<div class="form-group">
+  	<center><label for="comment">Зворотній нарямок:</label></center>
+                                <select class="form-select" aria-label=".form-select-lg example" name="val_select_twisted">
+					
+[% FOREACH id IN stops.keys.nsort(num) %]
+[% IF id >= a %]
+					<option value="[% stops.$id.id_station | html %]"><li>[% stops.$id.id | html %]. [% stops.$id.name | html %]</option>
+[% END %]
+[% END %]
+                                </select>
+		</div>
+				</div>
+			</div>
+		</div>   
+				   
+[% IF set_finish != 1 %]
+
+
+	<div class="progress">
+    		<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+	</div>
+[% END %]
+
+		<div class="footer-login">
+
+[% IF set_finish != 1 %]
+
+	<center> <input class="btn btn-primary" onclick="move()" type="submit" value="Формувати">
+[% ELSE %]
+	<center><button type="button" class="btn btn-primary" disabled>Формувати</button>
+
+[% END %]
+
+	<a href="/" class="btn btn-outline-primary">Вихід</a>
+
+[% IF set_finish == 1 %]
+  
+
+        <a href="/routes/Report_Chess_[% passport.1 %].xlsx" download="Шахматка_[% passport.1 %]">
+        <button type="button" class="btn btn-success">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+</svg>
+        Завантажити паспорт</button>
+        </a></center>
+
+[% END %]
+
+ 	</div>
+</div>
+
+  </section>
+
+</form>
+<script type="text/javascript">
+
+var $progress = $('.progress');
+var $progressBar = $('.progress-bar');
+var $alert = $('.alert');
+
+function move() {
+	setTimeout(function() {
+    $progressBar.css('width', '10%');
+    setTimeout(function() {
+        $progressBar.css('width', '30%');
+        setTimeout(function() {
+            $progressBar.css('width', '100%');
+            setTimeout(function() {
+                $progress.css('display', 'none');
+                $alert.css('display', 'block');
+            },1000); // WAIT 5 milliseconds
+        }, 3000); // WAIT 2 seconds
+    }, 2000); // WAIT 1 seconds
+}, 1000); // WAIT 1;
+};
+
+</script>
+			 </div>
+
+		   </div>
+</div>
+ </body>
+[% END %]
+</html>
+
+
+
+
+
+

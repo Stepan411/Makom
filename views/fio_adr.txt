@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<body>
+Our varibles: [% scalar %], [% list.0 %], [% list.1 %], [% hash.key %]
+Time: [% code %]
+_adr.txt
+User: [% cgi.param('user') %]
+	</body>i
+
+<tr><td> Our varibles: [% scalar %], [% list.0 %], [% list.1 %], [% hash.key %]<td>
+<tr><td> Time: [% code %]<td>
+<tr><td> User: [% cgi.param('user') %]<td>
+
+

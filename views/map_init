@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+ 	<script
+         	src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&language=uk&callback=initMap"></script>
+
+<style>
+	#map { height: 700px; }
+
+
+</style>
+</head>
+<body>
+	<div id="map"></div> 
+
+<form id="track_map" action="/print_map" method=post>
+
+<script> 
+
+
+var map;
+
+  	function initMap()
+
+{
+
+
+
+
+
+var latlng = { lat: 50.74520809060286, lng: 25.319942873915547 };
+ 
+var element = document.getElementById("map");
+var options = {
+        zoom: 13,
+        center: latlng,
+};
+ map = new google.maps.Map(element, options);
+
+
+
+
+
+}
+
+
+
+initMap(); //initMap();   window.initialize = initMap();
+
+
+
+</script>
+
+
+
+ </form>
+</body>
+
+</html>
+

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mak-om</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2? родина= Roboto:wght@300;400;500;700 & display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel=stylesheet type=text/css href="[% css_url %]">
+	<script src="https://kit.fontawesome.com/4da5029cac.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!--  font-family: 'Roboto', sans-serif;  -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+   <div class="container-fluid">
+   <!--<a class="navbar-brand" href="#">M-ОМ</a>-->
+
+    <a class="navbar-brand" href="#">
+      <img src="/images/Logo MAK.png" alt="" width="24" height="24" class="d-inline-block align-text-top logo-mak">
+      mak-om
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Зачин</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link active" aria-current="page" href="/route">Маршрут</a>
+        </li>
+	 <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login">Мапа</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Характеристика
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Загальні показники</a></li>
+            <li><a class="dropdown-item" href="#">Небезпечні ділянки</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Облаштування зупинок</a></li>
+          </ul>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Паспорт</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">ЕРА</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Симуляція</a>
+        </li>
+   </ul>
+   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </a>
+          <ul class="dropdown-menu">
+            	<li><a class="dropdown-item" href="#">Реєстрація</a></li>
+		<li><a class="dropdown-item" href="[% login_url %]">Вхід/Вихід</a></li>
+		<li><a class="dropdown-item" href="/synchronization">Синхронізація БД</a></li>
+          	<li><hr class="dropdown-divider"></li>
+            	<li><a class="dropdown-item" href="[% logout_url %]">Вихід з системи</a></li>
+	</ul>
+         <li class="nav-item">
+           <a class="nav-link active" href="#"><i class="fa-solid fa-house-user"></i></a>
+         </li>
+       </ul>
+ </div>
+  </div>
+</nav>
+  [% content %]
+
+<div class="conteiner-fluid my-carousel">
+
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/images/1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-block">
+        <h5>Розклади</h5>
+        <p>Ви вводите лише зупинки, а графіки руху транспорту, обіди, перезмінки створюються МАК-ОМ.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/images/2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-block">
+        <h5>Паспорт</h5>
+        <p>Для будь-якого транспорту абсолютно всі сторінки формуються і видаються на друк атоматично.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/images/3.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-block">
+        <h5>Рахує програма</h5>
+        <p>12 маршрут м. Луцьк має 112 зупинок в робочі дені здійснює 7 рейсіві і  лише один автобус має 784 часові точки.</p>
+      </div>
+    </div>
+
+  <div class="carousel-item">
+      <img src="/images/4.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-block">
+        <h5>Водії</h5>
+        <p>Графік режиму праці та відпочинку водіїв на маршруті автоматично створються та видаються на друк.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/images/6.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-block">
+        <h5>Мапа</h5>
+        <p>Відстань між зупинками, загальна довжина рейсу та мапа рахуються та видаються на друк МАК-ОМ.</p>
+      </div>
+  </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+	 </div>
+</div>
+
+	<section class="main-content">
+		<div class="container">
+		   <div class="row">
+			<div class="col-md-4 col-sm-6">
+			   <div class="service-card">
+				<div class="service-im">
+				<a href="#"><img src="/images/trolleybus.png" alt=""></a>
+				</div>
+				<div class="service-details"> 
+				<h4><a href="#">Можливості</a></h4>
+				<p>Симуляція руху громадського транспорту на мапі на спільних участках маршрутів з відладкою графіків руху</p>
+</div>
+</div>
+</div>
+				<div class="col-md-4 col-sm-6">	
+                           <div class="service-card">
+                                <div class="service-im">
+                                <a href="#"><img src="/images/passport.jpg" alt=""></a>
+                                </div>
+                                <div class="service-details">
+                                <h4><a href="#">Розумні розклади</a></h4>
+                                <p>Організація та ефективність роботи транспортних одиниць на маршруті визначається основним плановим документом – розкладом руху</p>
+</div>
+</div>
+</div>
+				<div class="col-md-4 col-sm-6">
+                           <div class="service-card">
+                                <div class="service-im">
+                                <a href="#"><img src="/images/EPA.png" alt=""></a>
+                                </div>
+                                <div class="service-details">
+                                <h4><a href="#">Екран "ЕРА"</a></h4>
+                                <p>Функціонал екран "ЕРА" дозволяє графічно відобразити графіки руху вибраних маршрутів та відлагодити їхні розклади </p>
+</div>
+</div>
+</div>
+			</div>
+		</div> 
+	</section>
+	
+	<footer>
+		<section class="footer">
+			<div class="container">
+			<div class="row">
+			<div class="col-md-3 col-6">
+			<h4>Інформація</h4>
+			<ul class="list-unstyled">
+			  <li><a href="#">Головна</a></li>
+			  <li><a href="#">Про нас</a></li>
+			  <li><a href="#">Наші сервіси</a></li>
+			  <li><a href="#">Запит на тест</a></li>
+			  <li><a href="#">Опис МАК-ОМ</a></li>
+	
+</ul>
+</div>
+
+                        <div class="col-md-3 col-6">
+                        <h4>Офіс</h4>
+                        <ul class="list-unstyled">
+                          <li>м. Луцьк</li>
+                          <li>вул. Потебні, 50</li>
+                          <li><a href="https://mak.lutsk.ua/">ТзОВ "Візор-МАК"</a></li>
+                          <li>Науково-виробнича ІТ-лабораторія</li>
+			  <li><a href="http://smart.volyn.ua/">«SMART VOLYN»</a></li>
+
+</ul>
+</div>
+                        <div class="col-md-3 col-6">
+                        <h4>Контакти</h4>
+                        <ul class="list-unstyled">
+                          <li><a href="tel:+380500122707">+380500122707</a></li>
+                          <li><a href="mailto:ss.vizor@gmail.com<">ss.vizor@gmail.com</a></li>
+
+</ul>
+</div>
+                        <div class="col-md-3 col-6">
+                        <h4>Наші проекти</h4>
+                        <ul class="list-unstyled">
+                          <li><a href="http://smart.volyn.ua/">«SMART VOLYN»</a></li>
+                          <li><a href="https://mak.lutsk.ua/">mak.lutsk.ua</a></li>
+                          <li><a href="http://mak-om.lt.ua/">МАК-ОМ</a></li>
+                          <li><a href="http://nic.lutsk.ua/">nic.lutsk.ua</a></li>
+
+</ul>
+</div>
+
+
+</div>
+</div>
+		</section>
+	</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+</body>
+</html>

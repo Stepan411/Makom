@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="UTF-8">
+        <script
+                src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&libraries=drawing&region=uk"></script>
+        <script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<style>
+
+#map { height: 100%; }
+
+
+</style>
+</head>
+<body>
+<form id="track_map" action="/mapa" method=post>
+<script language="javascript">
+
+
+
+
+</script>
+<div class="fixedbut">
+        <input class="btn btn-primary btn-sm" type="submit" value="Зберегти">
+        <input type="hidden" id="track_map" name="track_map" value="1">
+        <a href="[% logout_url %]" class="btn btn-warning btn-sm">Вихід</a>
+
+</div>
+ </form>
+</body>
+</html>
+

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Sidebars · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+
+<!--<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+<link rel="stylesheet" type="text/css" href="css/sidebars.css" media="screen">
+<link rel="stylesheet" type="text/css" href="css/sidebars_my.css" media="screen">
+
+<script src="javascripts/sidebars.js"></script>
+
+        <link href="css/sidebars.css" rel="stylesheet">
+<style>
+.prokrutka {
+height: 355px; /* высота нашего блока */
+width:110px; /* ширина нашего блока */
+background: #fff; /* цвет фона, белый */
+border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+/* прокрутка по горизонтали */
+overflow-y: auto; /*scroll;   прокрутка по вертикали */
+}
+</style>
+
+
+  </head>
+  <body>
+
+<main class="d-flex flex-nowrap">
+  <h1 class="visually-hidden">Sidebars examples</h1>
+<div class="b-example-divider b-example-vr"></div>
+
+<div class="flex-shrink-0 p-3 bg-white" style="width: 140px;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+<!-- <img class="bi pe-none me-2" src="images/gear-wide.svg" alt="Bootstrap" width="16" height="16">-->
+      <span class="fs-5 fw-semibold">Луцьк</span>
+    </a>
+<div class="prokrutka">
+    <ul class="list-unstyled ps-0">
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu2-collapse" aria-expanded="false">
+          2
+        </button>
+        <div class="collapse" id="id_menu2-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu3-collapse" aria-expanded="false">
+          3
+        </button>
+        <div class="collapse" id="id_menu3-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">8</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">9</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu5-collapse" aria-expanded="false">
+          5
+        </button>
+        <div class="collapse" id="id_menu5-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu6-collapse" aria-expanded="false">
+          6
+        </button>
+        <div class="collapse" id="id_menu6-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu7-collapse" aria-expanded="false">
+          7
+        </button>
+        <div class="collapse" id="id_menu7-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu10-collapse" aria-expanded="false">
+          10
+        </button>
+        <div class="collapse" id="id_menu10-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu12-collapse" aria-expanded="false">
+          12
+        </button>
+        <div class="collapse" id="id_menu12-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu25-collapse" aria-expanded="false">
+          25
+        </button>
+        <div class="collapse" id="id_menu25-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu30-collapse" aria-expanded="false">
+          30
+        </button>
+        <div class="collapse" id="id_menu30-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu32-collapse" aria-expanded="false">
+          32
+        </button>
+        <div class="collapse" id="id_menu32-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu44-collapse" aria-expanded="false">
+          44
+        </button>
+        <div class="collapse" id="id_menu44-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          </ul>
+        </div>
+      </li>
+       <li class="mb-1">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu53-collapse" aria-expanded="false">
+          53
+        </button>
+        <div class="collapse" id="id_menu53-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+          </ul>
+        </div>
+      </li>
+    </div>
+   </ul>
+  </div>
+</main>
+      <script src="javascripts/sidebars.js"></script>
+  </body>
+</html>
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy

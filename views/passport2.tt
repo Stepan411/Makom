@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<form action="/passport2" method="post" accept-charset="utf-8">
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+
+[% IF passport.size %]
+[% FOREACH id IN passport.keys.nsort %]
+
+
+              <center><h2>Формування паспорта: М: [% passport.$id.routes %] Г: [% passport.$id.graphs %]</h2></center> 
+
+[% END %]
+[% END %]
+ 
+<style>
+  span {
+    display: inline-block;
+    width: 508px;
+    margin: 6px;
+    background-color: #f9f9f9;
+  }
+  </style>
+
+  <span class="border-bottom"></span>
+
+        <div class="alert alert-danger" role="alert">
+<div class="row mb-2">
+     <center><h5>Зкореговано:</h5></center>
+</div>
+<div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="option1" name="option1" value=" Графік руху">
+        <label class="form-check-label" for="option1">
+          Графіки руху
+        </label>
+      </div>
+    </div>
+  </div>
+
+[% s411 %]
+ <div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="option2" name="option2" value=" Зачин">
+        <label class="form-check-label" for="option2">
+          Зачин
+        </label>
+      </div>
+    </div>
+</div>
+<div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck4" name="option3" value=" Зупинки">
+        <label class="form-check-label" for="option3">
+          Зупинки
+        </label>
+      </div>
+    </div>
+  </div>
+<div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck4" name="option4" value=" Помічено зворотню зупинку">
+        <label class="form-check-label" for="option4">
+          Помічено зворотню зупинку
+        </label>
+      </div>
+    </div>
+  </div>
+	</div>
+<center><input type="text" size="48"></center>
+
+                <div class="footer-login">
+                        <a class="btn btn-primary" href="/passport2">Сформувати</a>
+                        <a href="[% logout_url %]" class="btn btn-outline-primary">Відмовитися</a>
+                </div>
+</div>
+</form>
+ <script type="text/javascript">
+
+var GetValue = (function() {
+  function GetValue() {
+    this.init();
+    this.events();
+  }
+
+  GetValue.prototype.init = function() {
+        this.form = document.querySelector('form');
+        this.textInput = this.form.querySelector('input[type="text"]');
+        this.checkboxes = [].slice.call(this.form.querySelectorAll('input[type="checkbox"]'));
+        this.arraySelected = new Array();
+  };
+
+  GetValue.prototype.events = function() {
+        return this.checkboxes.forEach((function(_this) {
+          return function(el) {
+              return el.addEventListener('click', function() {
+                return _this.set(el);
+              });
+          };
+        })(this));
+  };
+
+  GetValue.prototype.set = function (el) {
+        if (this.arraySelected.indexOf(el.value) >= 0) {
+                this.arraySelected.splice(this.arraySelected.indexOf(el.value), 1);
+                this.textInput.value = this.arraySelected;
+        } else {
+                this.arraySelected.push(el.value)
+                this.textInput.value = this.arraySelected;
+        }
+  };
+
+  return GetValue;
+
+})();
+
+new GetValue();
+
+ </script>
+
+</html>
+
+

@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+[% IF session.logged_in %]
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Sidebars · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+
+<!--<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+<link rel="stylesheet" type="text/css" href="css/sidebars.css" media="screen">
+<link rel="stylesheet" type="text/css" href="css/sidebars_my.css" media="screen">
+
+<script src="javascripts/sidebars.js"></script>
+
+        <link href="css/sidebars.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.prokrutka {
+height: 355px; /* высота нашего блока */
+width:110px; /* ширина нашего блока */
+background: #fff; /* цвет фона, белый */
+border: 1px solid red; /* размер и цвет границы блока */
+/* прокрутка по горизонтали */
+overflow-y: auto; /*scroll;   прокрутка по вертикали */
+}
+</style>
+  		</head>
+  		<body>
+	 <div class="vh-100 p-3" style="background-color: #eee;">
+
+<div class="row g-0 text-center">
+  <div class="col-sm-6 col-md-4">
+
+<main class="d-flex flex-nowrap flex-nowrap">
+  <h1 class="visually-hidden">Sidebars examples</h1>
+<div class="b-example-divider b-example-vr"></div>
+<div class="flex-shrink-0 p-3 bg-white" style="width: 140px;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+<!-- <img class="bi pe-none me-2" src="images/gear-wide.svg" alt="Bootstrap" width="16" height="16">-->
+      <span class="fs-5 fw-semibold">Автобуси</span>
+    </a>
+<div class="prokrutka shadow p-3 mb-5 bg-body rounded">
+    <ul class="list-unstyled ps-0">
+<li class="mb-1">
+        <button onclick = "checkAttr_1()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu1-collapse" aria-expanded="false">
+          1
+        </button>
+<script>
+function checkAttr_1() {
+document.getElementById('routes').value = 1
+document.getElementById('routes_id').value = 19
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu1-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_1_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_1_1() {
+document.getElementById('routes').value = 1
+document.getElementById('routes_id').value = 19
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 80
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_1_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_1_2() {
+document.getElementById('routes').value = 1
+document.getElementById('routes_id').value = 19
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 81
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_5()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu5-collapse" aria-expanded="false">
+          5
+        </button>
+<script>
+function checkAttr_5() {
+document.getElementById('routes').value = 5
+document.getElementById('routes_id').value = 1
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu5-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_5_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_5_1() {
+document.getElementById('routes').value = 5
+document.getElementById('routes_id').value = 1
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 1
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_5_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_5_2() {
+document.getElementById('routes').value = 5
+document.getElementById('routes_id').value = 1
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 2
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_6()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu6-collapse" aria-expanded="false">
+          6
+        </button>
+<script>
+function checkAttr_6() {
+document.getElementById('routes').value = 6
+document.getElementById('routes_id').value = 2
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu6-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_6_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_6_1() {
+document.getElementById('routes').value = 6
+document.getElementById('routes_id').value = 2
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 3
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_6_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_6_2() {
+document.getElementById('routes').value = 6
+document.getElementById('routes_id').value = 2
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 4
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_6_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_6_3() {
+document.getElementById('routes').value = 6
+document.getElementById('routes_id').value = 2
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 5
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_6_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_6_4() {
+document.getElementById('routes').value = 6
+document.getElementById('routes_id').value = 2
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 6
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_7()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu7-collapse" aria-expanded="false">
+          7
+        </button>
+<script>
+function checkAttr_7() {
+document.getElementById('routes').value = 7
+document.getElementById('routes_id').value = 7
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu7-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_7_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_7_1() {
+document.getElementById('routes').value = 7
+document.getElementById('routes_id').value = 7
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 43
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_7_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_7_2() {
+document.getElementById('routes').value = 7
+document.getElementById('routes_id').value = 7
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 44
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_7_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_7_3() {
+document.getElementById('routes').value = 7
+document.getElementById('routes_id').value = 7
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 45
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_7_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_7_4() {
+document.getElementById('routes').value = 7
+document.getElementById('routes_id').value = 7
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 46
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_9()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu9-collapse" aria-expanded="false">
+          9
+        </button>
+<script>
+function checkAttr_9() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu9-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_9_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_9_1() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 58
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_9_2() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 59
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_9_3() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 60
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_9_4() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 61
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_9_5() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 62
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_9_6() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 63
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_9_7()" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+<script>
+function checkAttr_9_7() {
+document.getElementById('routes').value = 9
+document.getElementById('routes_id').value = 18
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 7
+document.getElementById('graphs_id').value = 64
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_11()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu11-collapse" aria-expanded="false">
+          11
+        </button>
+<script>
+function checkAttr_11() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu11-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_11_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_11_1() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 82
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_11_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_11_2() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 83
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_11_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_11_3() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 84
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_11_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_11_4() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 85
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_11_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_11_5() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 86
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_11_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_11_6() {
+document.getElementById('routes').value = 11
+document.getElementById('routes_id').value = 20
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 87
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_12()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu12-collapse" aria-expanded="false">
+          12
+        </button>
+<script>
+function checkAttr_12() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu12-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_12_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_12_1() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 11
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_12_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_12_2() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 12
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_12_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_12_3() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 13
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_12_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_12_4() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 14
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_12_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_12_5() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 15
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_12_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_12_6() {
+document.getElementById('routes').value = 12
+document.getElementById('routes_id').value = 3
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 16
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_25()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu25-collapse" aria-expanded="false">
+          25
+        </button>
+<script>
+function checkAttr_25() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu25-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_25_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_25_1() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 36
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_25_2() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 37
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_25_3() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 38
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_25_4() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 39
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_25_5() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 40
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_25_6() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 41
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_25_7()" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+<script>
+function checkAttr_25_7() {
+document.getElementById('routes').value = 25
+document.getElementById('routes_id').value = 9
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 7
+document.getElementById('graphs_id').value = 42
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_30()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu30-collapse" aria-expanded="false">
+          30
+        </button>
+<script>
+function checkAttr_30() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu30-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_30_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_30_1() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 28
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_30_2() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 29
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_30_3() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 30
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_30_4() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 31
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_30_5() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 32
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_30_6() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 33
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_30_7()" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+<script>
+function checkAttr_30_7() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 8
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 7
+document.getElementById('graphs_id').value = 34
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_32()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu32-collapse" aria-expanded="false">
+          32
+        </button>
+<script>
+function checkAttr_32() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu32-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_32_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_32_1() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 22
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_32_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_32_2() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 23
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_32_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_32_3() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 24
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_32_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_32_4() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 25
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_32_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_32_5() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 26
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_32_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_32_6() {
+document.getElementById('routes').value = 32
+document.getElementById('routes_id').value = 5
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 27
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_50()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu50-collapse" aria-expanded="false">
+          50
+        </button>
+<script>
+function checkAttr_50() {
+document.getElementById('routes').value = 50
+document.getElementById('routes_id').value = 14
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu50-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_50_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_50_1() {
+document.getElementById('routes').value = 50
+document.getElementById('routes_id').value = 14
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 54
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_52()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu52-collapse" aria-expanded="false">
+          52
+        </button>
+<script>
+function checkAttr_52() {
+document.getElementById('routes').value = 52
+document.getElementById('routes_id').value = 11
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu52-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_52_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_52_1() {
+document.getElementById('routes').value = 52
+document.getElementById('routes_id').value = 11
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 48
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_53()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu53-collapse" aria-expanded="false">
+          53
+        </button>
+<script>
+function checkAttr_53() {
+document.getElementById('routes').value = 53
+document.getElementById('routes_id').value = 10
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu53-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_53_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_53_1() {
+document.getElementById('routes').value = 53
+document.getElementById('routes_id').value = 10
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 47
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_55()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu55-collapse" aria-expanded="false">
+          55
+        </button>
+<script>
+function checkAttr_55() {
+document.getElementById('routes').value = 55
+document.getElementById('routes_id').value = 12
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu55-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_55_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_55_1() {
+document.getElementById('routes').value = 55
+document.getElementById('routes_id').value = 12
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 49
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_56()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu56-collapse" aria-expanded="false">
+          56
+        </button>
+<script>
+function checkAttr_56() {
+document.getElementById('routes').value = 56
+document.getElementById('routes_id').value = 16
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu56-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_56_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_56_1() {
+document.getElementById('routes').value = 56
+document.getElementById('routes_id').value = 16
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 55
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_57()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu57-collapse" aria-expanded="false">
+          57
+        </button>
+<script>
+function checkAttr_57() {
+document.getElementById('routes').value = 57
+document.getElementById('routes_id').value = 13
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu57-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_57_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_57_1() {
+document.getElementById('routes').value = 57
+document.getElementById('routes_id').value = 13
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 50
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_57_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_57_2() {
+document.getElementById('routes').value = 57
+document.getElementById('routes_id').value = 13
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 51
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_57_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_57_3() {
+document.getElementById('routes').value = 57
+document.getElementById('routes_id').value = 13
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 52
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_57_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_57_4() {
+document.getElementById('routes').value = 57
+document.getElementById('routes_id').value = 13
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 53
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_58()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu58-collapse" aria-expanded="false">
+          58
+        </button>
+<script>
+function checkAttr_58() {
+document.getElementById('routes').value = 58
+document.getElementById('routes_id').value = 15
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu58-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_58_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_58_1() {
+document.getElementById('routes').value = 58
+document.getElementById('routes_id').value = 15
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 56
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+        <button onclick = "checkAttr_59()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu59-collapse" aria-expanded="false">
+          59
+        </button>
+<script>
+function checkAttr_59() {
+document.getElementById('routes').value = 59
+document.getElementById('routes_id').value = 17
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 'All'
+}
+</script>
+        <div class="collapse" id="id_menu59-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_59_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_59_1() {
+document.getElementById('routes').value = 59
+document.getElementById('routes_id').value = 17
+document.getElementById('transport_types_id').value = 1
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 57
+}
+</script>
+          </ul>
+        </div>
+      </li>
+    </div>
+   </ul>
+ </div>
+
+
+<div class="flex-shrink-0 p-3 bg-white" style="width: 140px;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+<!-- <img class="bi pe-none me-2" src="images/gear-wide.svg" alt="Bootstrap" width="16" height="16">-->
+      <span class="fs-5 fw-semibold">Тролейбуси</span>
+    </a>
+<div class="prokrutka shadow p-3 mb-5 bg-body rounded">
+    <ul class="list-unstyled ps-0">
+<li class="mb-1">
+	<button onclick = "checkAttr_2_30()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu302-collapse" aria-expanded="false">
+          30
+        </button>
+<script>
+function checkAttr_2_30() {
+document.getElementById('routes').value = 30
+document.getElementById('routes_id').value = 30
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 'All'
+}
+</script>
+<div class="collapse" id="id_menu302-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+	<button onclick = "checkAttr_2_31()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu312-collapse" aria-expanded="false">
+          31
+        </button>
+<script>
+function checkAttr_2_31() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 'All'
+}
+</script>
+<div class="collapse" id="id_menu312-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" onclick = "checkAttr_2_31_1()" class="link-dark d-inline-flex text-decoration-none rounded">1</a></li>
+<script>
+function checkAttr_2_31_1() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 1
+document.getElementById('graphs_id').value = 65
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_2()" class="link-dark d-inline-flex text-decoration-none rounded">2</a></li>
+<script>
+function checkAttr_2_31_2() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 2
+document.getElementById('graphs_id').value = 66
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_3()" class="link-dark d-inline-flex text-decoration-none rounded">3</a></li>
+<script>
+function checkAttr_2_31_3() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 3
+document.getElementById('graphs_id').value = 67
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_4()" class="link-dark d-inline-flex text-decoration-none rounded">4</a></li>
+<script>
+function checkAttr_2_31_4() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 4
+document.getElementById('graphs_id').value = 68
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_5()" class="link-dark d-inline-flex text-decoration-none rounded">5</a></li>
+<script>
+function checkAttr_2_31_5() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 5
+document.getElementById('graphs_id').value = 69
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_6()" class="link-dark d-inline-flex text-decoration-none rounded">6</a></li>
+<script>
+function checkAttr_2_31_6() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 6
+document.getElementById('graphs_id').value = 70
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_7()" class="link-dark d-inline-flex text-decoration-none rounded">7</a></li>
+<script>
+function checkAttr_2_31_7() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 7
+document.getElementById('graphs_id').value = 71
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_8()" class="link-dark d-inline-flex text-decoration-none rounded">8</a></li>
+<script>
+function checkAttr_2_31_8() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 8
+document.getElementById('graphs_id').value = 72
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_9()" class="link-dark d-inline-flex text-decoration-none rounded">9</a></li>
+<script>
+function checkAttr_2_31_9() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 9
+document.getElementById('graphs_id').value = 73
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_10()" class="link-dark d-inline-flex text-decoration-none rounded">10</a></li>
+<script>
+function checkAttr_2_31_10() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 10
+document.getElementById('graphs_id').value = 74
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_11()" class="link-dark d-inline-flex text-decoration-none rounded">11</a></li>
+<script>
+function checkAttr_2_31_11() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 11
+document.getElementById('graphs_id').value = 75
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_12()" class="link-dark d-inline-flex text-decoration-none rounded">12</a></li>
+<script>
+function checkAttr_2_31_12() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 12
+document.getElementById('graphs_id').value = 76
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_13()" class="link-dark d-inline-flex text-decoration-none rounded">13</a></li>
+<script>
+function checkAttr_2_31_13() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 13
+document.getElementById('graphs_id').value = 77
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_14()" class="link-dark d-inline-flex text-decoration-none rounded">14</a></li>
+<script>
+function checkAttr_2_31_14() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 14
+document.getElementById('graphs_id').value = 78
+}
+</script>
+            <li><a href="#" onclick = "checkAttr_2_31_15()" class="link-dark d-inline-flex text-decoration-none rounded">15</a></li>
+<script>
+function checkAttr_2_31_15() {
+document.getElementById('routes').value = 31
+document.getElementById('routes_id').value = 31
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 15
+document.getElementById('graphs_id').value = 79
+}
+</script>
+          </ul>
+        </div>
+      </li>
+<li class="mb-1">
+	<button onclick = "checkAttr_2_44()" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#id_menu442-collapse" aria-expanded="false">
+          44
+        </button>
+<script>
+function checkAttr_2_44() {
+document.getElementById('routes').value = 44
+document.getElementById('routes_id').value = 23
+document.getElementById('transport_types_id').value = 2
+document.getElementById('graphs').value = 'All'
+}
+</script>
+<div class="collapse" id="id_menu442-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          </ul>
+        </div>
+      </li>
+    </div>
+   </ul>
+ </div>
+
+<div class="b-example-divider b-example-vr"></div>
+</main>
+      <script src="javascripts/sidebars.js"></script>
+
+</div>
+  <div class="col-6 col-md-6">
+<div class="d-flex align-items-center h-100">
+  <div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+    <h1><span class="mak-color">мак</span>-ом</h1>
+    <form action="/menu" method=post>
+      <div class="container text-center">
+        <div class="row align-items-start">
+          <div class="col">
+                <p><b> Волинська область</b><br>
+          </div>
+          <div class="col">
+                <p><b> м. Луцьк</b><br>
+          </div>
+          <div class="col">
+                <p><b>Дата паспорта:</b><br>
+          </div>
+       </div>
+       <div class="row align-items-center">
+          <div class="col">
+                <p><b>Маршрут:</b><br>
+          </div>
+          <div class="col">
+                <P><input type="text" id="routes" size="10" name=routes readonly></P>
+		<input type="hidden" id="transport_types_id" name=transport_types_id>
+		<input type="hidden" id="routes_id" name=routes_id>
+          </div>
+          <div class="col">
+                <p><b>Автобуси</b><br>
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col">
+                <p><b>Графік:</b><br>
+          </div>
+          <div class="col">
+                <P><input type="text" id="graphs" size="10" name=graphs readonly></P>
+		<input type="hidden" id="graphs_id" name=graphs_id>
+          </div>
+          <div class="col">
+<select class="form-select" aria-label="Default select example" name=val_select>
+<!--  <option selected>Транспорт:</option>>-->
+  <option value="1">Автобуси</option>
+  <option value="2">Тролейбуси</option>
+  <option value="3">Трамваї</option>
+</select>
+           </div>
+          <div class="footer-login">
+                        <input class="btn btn-primary" type="submit" value="Вибір">
+                        <a href="/" class="btn btn-outline-primary">Вихід</a>
+          </div>
+        </div>
+      </div>
+     </form>
+     </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+  [% END %]
+</html>

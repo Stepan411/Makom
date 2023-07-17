@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!--<html>
+
+   "Маршрут: 2 Графік: Всі"
+
+<ul class=entries>
+[% IF passport.size %]
+  [% FOREACH id IN passport.keys.nsort %]
+  <li><h2>Маршрут:[% passport.$id.routes | html %]Графік:[% passport.$id.graphs | html %]</h2>
+  [% END %]
+[% ELSE %]
+<li><em>Неймовірно. Поки що тут немає записів</em>
+[% END %]
+</ul>
+
+
+</html>-->
+

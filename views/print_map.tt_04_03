@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!--   
+
+Стан на 18.01.2023р.
+
+<script type="module" src="../node_modules/@googlemaps/markerwithlabel/dist/index.min.js"></script>
+Скачав 2.0 не зміг підєднати (повернуся пізніше) ???
+
+<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
+Версія markerwithlabel 2.0 має питання
+  	- google.maps.event.addDomListener() is deprecated, use the standard
+        addEventListener() method instead:
+        https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener
+  The feature will continue to work and there is no plan to decommission
+  it.
+	- label - мають іншу ситему координат в порівнянні з версією markerwithlabel@2.0.14
+	- 128 тис. закачувань
+
+<script src="https://unpkg.com/@googlemaps/markerwithlabel@2.0.14/dist/index.min.js"></script>
+Версія markerwithlabel 2.0.14 (https://openbase.com/ - інша вітка розвитку markerwithlabel) має питання
+	-       - google.maps.event.addDomListener() is deprecated, use the standard
+        addEventListener() method instead:
+        https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener
+  The feature will continue to work and there is no plan to decommission
+  it.
+	- не працює клавіша "Esc"
+	- label - мають іншу ситему координат в порівнянні з версією markerwithlabel@2.0
+	- 7 тис. закачувань
+
+Рішення Залишаюся на версії 2.0
+ #map { height: 100%; }
+
+        setTimeout(post_track_map, 1000);   Запуск по часу
+        function post_track_map(){
+                document.forms["track_map"].submit();     POST форми по id в js
+        }
+
+           -->
+
+
+ 	<script
+         	src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&language=uk&callback=initMapi"></script>
+	<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<style>
+	#map { height: 700px; }
+
+ html,
+body {
+      /*     top: 55px }  &libraries=drawing&region=uk  */
+  margin: 0;
+  padding: 0;
+ }   
+/*   .fixedbut {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 5;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    } */
+   #floating-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   #floating-panel:hover {
+    background: #222;
+    }    
+   #floating-help {
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding-top: 0;
+    font-size: 17px;
+    }
+   .labels {
+//   transform: rotate(20deg);
+     color: black;
+     background-color: white;
+/*     font-family: "Lucida Grande", "Arial", sans-serif;*/
+     font-size: 12px;
+     font-weight: bold;
+     text-align: center;
+     width: auto;     
+     border: 2px solid black;
+     white-space: nowrap;
+     padding: 0 2px 0 2px;
+   }
+
+</style>
+</head>
+[% IF session.logged_in %]
+<body>
+
+    <div id="floating-panel">
+
+   <!--   	<input id="remove-line" class="btn btn-warning btn-sm" type="button" value="Крок (-)" />		
+      	<input id="add-line" class="btn btn-primary btn-sm" type="button" value="Лінія" />
+ -->
+
+	<button id="js-toast-trigger" type="button" class="btn btn-info btn-sm">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+  <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z"/>
+</svg>    
+
+	</button>    
+	<a href="/" class="btn btn-warning btn-sm">Вихід</a>
+   </div>
+
+<div id="floating-help" class="d-flex align-items-center">
+    <div id="liveToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+
+   	<div class="toast-header">
+
+		<div class="rounded me-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg>
+		</div>
+                	<strong class="me-auto">Довідка</strong>
+                	<small>Друк мапи</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    	</div>
+                        <div class="toast-body"> 
+	  Відкрити карту на весь екран.
+	Esc - відміна переносу лейби до кліку.
+	Вибрати необхідний зум.
+	Вирізати кліп "Ножницями" та зберегти в документі. 
+                                </div>
+    </div>
+</div>
+
+ <script>
+		var toastTrigger = document.getElementById('js-toast-trigger')
+		var toastLiveExample = document.getElementById('liveToast')
+	if (toastTrigger) {
+  			toastTrigger.addEventListener('click', function () {
+    			var toast = new bootstrap.Toast(toastLiveExample)
+    	toast.show()
+  	})
+}
+</script>
+
+	<div id="map"></div> 
+
+<form id="track_map" action="/print_map" method=post>
+
+kkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
+<script> // language="javascript">
+
+
+var map;
+
+  	function initMap()
+
+{
+
+var mas = [];
+let lines_sum = [];
+var a = 0;
+var i = 0;
+[% FOREACH i = hash %]
+	mas[a] = [% i %]
+	a = a +1;
+[% END %]
+
+var a = 0;
+[% FOREACH i = lines %]
+        lines_sum[a] = [% i %]
+        a = a +1;
+[% END %]
+var mss = [];
+ mss = JSON.parse(JSON.stringify(mas));
+var lines_ss = JSON.parse(JSON.stringify(lines_sum));
+
+var path = [];
+
+var latlng = { lat: 50.74520809060286, lng: 25.319942873915547 };
+ 
+var element = document.getElementById("map");
+var options = {
+        zoom: 14,
+        center: latlng,
+};
+var map = new google.maps.Map(element, options);
+	// Область показу маркерів для центрування карти
+	var mssBounds = new google.maps.LatLngBounds();
+
+
+  const flightPlanCoordinates = [];
+
+for (i = 0; i < lines_ss.length; i += 1) {
+    flightPlanCoordinates.push(new google.maps.LatLng(lines_ss[i].lat, lines_ss[i].lng));
+}
+
+//const flightPlanCoordinates = [lines_ss];
+  const flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 7,
+  });
+    flightPath.setMap(map);
+
+
+
+
+let markers = [];
+//let reverse_stops = 0;
+var str_summ  = 0;
+let y_label = 0;				// координати Label
+let x_label = 0;
+	var mssName = [];
+        var mssLat = [];
+        var mssLng = [];
+	var mssDirection = [];
+        var reverse_stops = [];
+const multiplier = 6.4;				// множник - умовне число для шріфта font-size: 12px;
+var str = '';
+
+
+//	var str = mss[i].name;
+	var mssName_s = mss.map(function(element) { 
+		return element.name; 
+	});
+console.log('mssName_s='+mssName_s);
+
+	var mssLat_s = mss.map(function(element) { 
+		return element.lat; 
+	});
+console.log('mssLat_s='+mssLat_s);
+
+	var mssLng_s = mss.map(function(element) { 
+		return element.lng; 
+	});
+        var mssDirection_s = mss.map(function(element) {
+		return element.direction;
+        });
+        var reverse_stops_s  = mss.map(function(element) {
+    		return element.radio_pzz;
+        });
+
+for (var i = 0; i< mssName_s.length; i++){
+
+	mssName[i] = mssName_s[i].concat(';');
+	mssName[i].split(';');
+
+console.log('mssName[i]='+ mssName[i]+'mssName_s='+mssName_s[i]+'i='+i);
+	    }
+	    /*
+for (var i = 0; i< mssLat_s.length; i++){
+	    console.log('mssLat_s='+mssLat_s);
+	    console.log('mssLat[i]='+ mssLat[i]+'mssLat_s='+mssLat_s[i]+'i='+i);
+
+		mssLat[i] =  mssLat_s[i];
+
+	    	mssLat[i] = mssLat[i].concat(1);
+
+
+//        mssLat[i].split(';');
+	    console.log('mssLat[i]='+ mssLat[i]+'mssLat_s='+mssLat_s[i]+'i='+i);
+	    }
+	    for (var i = 0; i< mssLat_s.length; i++){
+
+        mssLng[i] = mssLng_s[i].concat(';');
+        mssLng[i].split(';');
+
+        mssDirection = mssDirection_s[i].concat(';');
+        mssDirection.split(';');
+
+        reverse_stops = reverse_stops_s[i].concat(';');
+        reverse_stops.split(';');
+
+	var str9 = 0;
+	    console.log('mss='+ mssName[i]+'str='+mssDirection[i]+'i='+i+ 'str'+str+ 'st5550'+str[i]+ 'str9='+str9);
+
+	    }
+*/
+for (var i = 0; i< mssName.length; i++){
+               
+	str = mssName[i];
+	
+console.log('str1='+str+' i='+i);
+           str = str.toLowerCase();
+                let sub = 'ш';                                  // Нижче функція для добавлення для букви "ш" +2;
+
+              var str_summ  = str.length;                       // щитаємо к-сть символів у назві зупинки
+console.log('str_summ='+str_summ + '[i]=' +i);
+
+        function indexOf(str, substr) {
+                if (str.indexOf(substr) === -1) {
+                        return;
+        } else {
+                index = str.indexOf(substr)
+                str_summ = str_summ + 2;
+                console.log('str_summ2='+str_summ);
+                        return;
+                }
+        }
+        document.write(indexOf(str,sub));
+
+
+//reverse_stops = mss[i].radio_pzz;
+//var angle =  mss[i].direction;		// кут руху на зупинці для оприділення сторони видачі Label (праваб ліва сторона маркера)
+
+if (reverse_stops_s == 0) {
+	if (mssDirection_s[i] < 270) {
+		if (mssDirection_s[i] > 90) {
+        		y_label = 30;
+        		x_label = 12 + str_summ * multiplier;
+		} else {
+        	        y_label = 30;
+                	x_label = -11
+	//console.log(str, y_label, x_label, angle);
+	};
+	} else {
+  		y_label = 30;
+                x_label = -11
+	};
+//	reverse_stops = mss[i+1].radio_pzz;
+//console.log(str_summ, reverse_stops, x_label);
+} else {
+	reverse_stops_s = 1;
+        if (mssDirection_s[i] < 270) {
+	        if (mssDirection_s[i] > 90) {
+		        y_label = 30;
+                	x_label = 12 + str_summ * multiplier;
+		} else {
+                	y_label = 30;
+                	x_label = -11
+	};
+	} else {
+                y_label = 30;
+                x_label = -11
+	};
+};
+
+console.log(mssLat_s[i]+'mssLng_s[i]='+mssLng_s[i]);
+	
+markers[i] = new MarkerWithLabel({    //new markerWithLabel.MarkerWithLabel                - для версії 2.0.14
+ 	position: new google.maps.LatLng(mssLat_s[i], mssLng_s[i]),
+ 	title: mssName[i],
+ 	map: map,
+	draggable: true,
+	raiseOnDrag: false,
+	icon: {
+   		url: '/images/bus2_stops.png',
+  	},
+
+
+       	labelContent: mssName[i],
+	labelClass: "labels",
+        labelAnchor: new google.maps.Point(x_label, y_label),
+	//	labelStyle: {opacity: 0.75},
+
+
+    });
+
+
+//var id_store = markers[i].set("id": i);
+var lat;
+var lng;
+var id;
+var positionStart;
+ 	google.maps.event.addListener(markers[i], 'dragstart', function(marker) {
+	positionStart = marker.latLng;
+//var Lat_St = event.latLng.lat();
+//var Lng_St = event.latLng.lng();
+//console.log(Lat_St, Lng_St);
+   });
+
+     	google.maps.event.addListener(markers[i], 'dragend', function(marker) {
+     	positionEnd = marker.latLng;
+
+	var lineCoordinates = [
+     		new google.maps.LatLng(positionStart),
+     	new google.maps.LatLng(positionEnd),
+	];
+
+	var lineSymbol = {
+		path: 'M 0,-1 0,1',
+	  	strokeOpacity: 1,
+		strokeWeight: 4,
+   		scale: 4
+	};
+
+	var line = new google.maps.Polyline({
+  		path: lineCoordinates,
+  		editable: true,
+		strokeColor: '#6f00ff',
+  		strokeOpacity: 0,
+  	icons: [{
+    		icon: lineSymbol,
+    		offset: '0',
+    		repeat: '13px'
+  	}],
+  		map: map,
+		});
+
+
+//line.setMap(map);
+//var path = line.getPath();
+/*        google.maps.event.addListener(map, 'contextmenu', function(event) {
+                        var points_summ = path.push(event.latLng);
+                        var points = line.getPath().getArray();
+			
+var route_LatLng = JSON.stringify(points) ;
+                console.log(route_LatLng, i);
+                        fetch('/print_map', {
+                                method: "POST",
+                                body: JSON.stringify(points),
+        });
+    });   */
+  });  
+ }
+}
+
+
+
+initMap(); //initMap();   window.initialize = initMap();
+
+</script>
+
+
+fffffffffffffffffffffffffffff
+
+
+
+
+ <!--
+<div class="fixedbut">
+	<input class="btn btn-primary btn-sm" type="submit" value="Зберегти">
+	<input type="hidden" id="track_map" name="track_map" value="1">
+	<a href="[% logout_url %]" class="btn btn-warning btn-sm">Вихід</a>
+
+</div>
+<F12><F12><F12>
+
+<p>Hi there, [% session.user %]!</p>
+<p>You're using [% request.user_agent %]</p>
+[% IF session.user %]
+    <p>You're logged in as [% session.user %]</p>
+[% END %]
+It's currently [% session.time %]
+-->
+
+
+
+ </form>
+</body>
+[% ELSE %]
+
+<h1>Назва шаблону: [% response.template %]</h1>
+                <div id="floating-help" class="d-flex align-items-center">
+                        <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+                                <div class="toast-header">
+
+                                        <div class="rounded me-2">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg>
+                                        </div>
+
+                        <strong class="me-auto">Довідка</strong>
+                        <small>Друк мапи</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+          На екрані приклад прорамно-створеної мапи.
+        Вам лишається лише видати на друк дане зображення маршруту.
+        Для вирішення шляхів використання системи МАК-ОМ Вам необхідно відправити реестраційні дані.
+                                <div class="mt-2 pt-2 border-top">
+        <a href="[% logout_url %]" type="button" class="btn btn-warning btn-sm">Реестрація</a>
+        <a href="[% logout_url %]" type="button" class="btn btn-dark btn-sm">Вихід</a>
+                                </div>
+                       </div>
+                </div>
+        </div>
+
+ <script>
+
+window.onload = (event) => {
+  let myAlert = document.querySelectorAll('.toast')[0];
+  if (myAlert) {
+    let bsAlert = new bootstrap.Toast(myAlert);
+    bsAlert.show();
+  }
+};
+
+ </script>
+
+
+
+                <img src="/images/52.png" class="d-block w-100" alt="...">
+
+
+
+[% END %]
+
+</html>
+

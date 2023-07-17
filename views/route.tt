@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+[% IF session.logged_in %]
+  <form action="/synchronization" method=post class=add-entry>
+    <dl>
+      <dt>Title:
+      <dd><input type=text size=30 name=title>
+      <dt>Text:
+      <dd><textarea name=text rows=5 cols=40></textarea>
+      <dd><input type=submit value=Share>
+    </dl>
+  </form>
+[% END %]
+[% rows.first %] - [% rows.last %], including [% rows.3 %]
+
+[% rows.size %] prime numbers: [% rows.join(', ') %]
+
+<ul class=entries>
+
+[% wizard %]                    # Abracadabra!
+[% wizard('Hocus Pocus!') %]    # Abracadabra! Hocus Pocus!
+
+[% IF routes.size %]
+[% FOREACH id IN routes.keys.sort %]
+<li><h2>routes:[% routes.$id.id | html %] [% routes.$id.name | html %] [% routes.$id.transport_types_id | html %] [% routes.$id.route_types_id  | html %]</h2>
+[% END %]
+
+[% ELSE %]
+<li><em>Неймовірно.routs Поки що тут немає записів</em>
+[% END %]
+</ul>
+
+[% FOREACH item = [ 'foo' 'bar' 'baz' ] %]
+   * Item: [% item %]
+[% END %]
+
+<!DOCTYPE html>
+
+<nav>
+  <ul class="nav nav-pills nav-stacked span2">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+

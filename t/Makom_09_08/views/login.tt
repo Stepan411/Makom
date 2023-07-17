@@ -1,0 +1,21 @@
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+  <h1><span class="mak-color">мак</span>-ом</h1>
+     <div class=metanav>
+	<a href="[% logout_url %]" class="btn btn-outline-primary">Вихід</a>
+     </div>
+[% IF err %]<p class=error><strong>Помилка:</strong> [% err %][% END %]
+		<form action="[% login_url %]" method=post>
+  			<dl>
+    			 <dt>Логін:
+    			 <dd><input type=text name=username>
+    			 <dt>Пароль:
+    			 <dd><input type=password name=password>
+	<div class="footer-login">
+    			 <dd><input class="btn btn-primary" type="submit" value="Вхід">
+  	</div>
+			</dl>
+		</form>
+</div>
+
+
+

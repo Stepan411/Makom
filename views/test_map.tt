@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+
+ 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&libraries=drawing&region=uk"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="/node_modules/@googlemaps/markerwithlabel/dist/index.min.js"></script>
+
+
+<style>
+	#map { width: 100%; height: 900px; border: 1px solid #ccc; }
+ 
+   .fixedbut {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
+    background: #2db700;
+    color: #fff; 
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    }
+
+</style>
+</head>
+<body>
+	<div id="map"></div> 
+<form id="track_map" action="/mapa" method=post>
+<script language="javascript">
+ function initMap() 
+{
+var latlng = { lat: 50.74520809060286, lng: 25.319942873915547 };
+var element = document.getElementById("map");
+var options = {
+        zoom: 14,
+        center: latlng,
+};
+
+
+
+var map = new google.maps.Map(element, options);
+
+	// Область показу маркерів для центрування карти
+	var mssBounds = new google.maps.LatLngBounds();
+
+
+//--------------------------------------------------------------------
+new markerWithLabel.MarkerWithLabel();
+//import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
+new MarkerWithLabel({
+    position: new google.maps.LatLng(49.475, -123.84),
+    clickable: true,
+    draggable: true,
+    map: map,
+    labelContent: "foo", // can also be HTMLElement
+    labelAnchor: new google.maps.Point(-21, 3),
+    labelClass: "labels", // the CSS class for the label
+    labelStyle: { opacity: 1.0 },
+})
+//-----------------------------------------------------------------------
+
+}
+initMap(); 
+</script>
+<div class="fixedbut">
+	<input class="btn btn-primary" type="submit" value="Зберегти">
+	<input type="hidden" id="track_map" name="track_map" value="1">
+	<a href="[% logout_url %]" class="btn btn-warning">Вихід</a>
+</div>
+
+
+ </form>
+</body>
+
+
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps & D3.js Example</title>
+    <style>
+ #map { height: 700px; }
+
+ 
+      #slider {
+        margin-top: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="values-slider"></div>
+    <div id="slider"></div>
+    <!--
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&language=uk&callback=initMapi"></script>
+
+<script src="/javascripts/nouislider.min.js"></script>
+<link href="/css/nouislider.min.css" rel="stylesheet">
+<div class="noUiSlider"></div><br>
+    <script>
+      // Initialize the Google Map
+      function initMap() {
+
+var valuesSlider = document.getElementById('values-slider');
+var valuesForSlider = [0,1,2,3,4,5,6,7,8,10,12,14,16,20]; // 16 values
+
+var format = {
+    to: function(value) {
+        return valuesForSlider[Math.round(value)];
+    },
+    from: function (value) {
+        return valuesForSlider.indexOf(Number(value));
+    }
+};
+
+noUiSlider.create(valuesSlider, {
+    start: [8, 24],
+    // A linear range from 0 to 15 (16 values)
+    range: { min: 0, max: valuesForSlider.length - 1 },
+    // steps of 1
+    step: 1,
+    tooltips: true,
+    format: format,
+    pips: { mode: 'steps', format: format },
+});
+
+// The display values can be used to control the slider
+valuesSlider.noUiSlider.set(['4', '12']);
+var values = valuesSlider.noUiSlider.get();
+console.log(values);
+
+valuesSlider.noUiSlider.on('update', function(values, handle) {
+  var currentValue = valuesSlider.noUiSlider.get();
+  console.log(currentValue);
+});
+/*
+	const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 50.7568376183486, lng: 25.3450718375684 },
+          zoom: 13,
+        });
+*/    
+
+
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 50.7568376183486, lng: 25.3450718375684 },
+    zoom: 6,
+    mapTypeId: "terrain",
+  });
+  // Define the symbol, using one of the predefined paths ('CIRCLE')
+  // supplied by the Google Maps JavaScript API.
+  const lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: "#393",
+  };
+var path = [
+    { lat: 50.7568376183486, lng: 25.3450718375684 },
+    { lat: 50.758291, lng: 25.349900 },
+    { lat: 50.7608376183486, lng: 25.3550718375684 },
+];
+
+var pach1 = path;
+
+// Create the polyline and add the symbol to it via the 'icons' property.
+  const line = new google.maps.Polyline({
+    path: pach1,
+    icons: [
+      {
+        icon: lineSymbol,
+        offset: "100%",
+      },
+    ],
+    map: map,
+  });
+
+  animateCircle(line);
+}
+
+// Use the DOM setInterval() function to change the offset of the symbol
+// at fixed intervals.
+function animateCircle(line) {
+  let count = 0;
+
+  window.setInterval(() => {
+    count = (count + 1) % 200;
+
+    const icons = line.get("icons");
+
+    icons[0].offset = count / 2 + "%";
+    line.set("icons", icons);
+  }, 20);
+
+
+
+
+}
+initMap();
+    </script>
+   </body>
+</html>
+

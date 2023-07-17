@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+    <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script data-require="jquery-easing@*" data-semver="0.1.3" src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBi83mZ1Jd1UxsupafGhlswoUPGk3Iy1GM&language=uk&callback=initMapi"></script>
+
+    <script data-require="marker-animate@*" data-semver="0.2.8" src="https://cdnjs.cloudflare.com/ajax/libs/marker-animate-unobtrusive/0.2.8/vendor/markerAnimate.js"></script>
+    <script data-require="marker-animate-unobtrusive@*" data-semver="0.2.8" src="https://cdnjs.cloudflare.com/ajax/libs/marker-animate-unobtrusive/0.2.8/SlidingMarker.min.js"></script>
+
+<!--	<script src="https://cdn.sobekrepository.org/includes/gmaps-markerwithlabel/1.9.1/gmaps-markerwithlabel-1.9.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	-->
+
+<style>
+	#map { height: 700px; }
+
+ html,
+body {
+      /*     top: 55px }  &libraries=drawing&region=uk  */
+  margin: 0;
+  padding: 0;
+ }   
+/*   .fixedbut {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 5;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    } */
+   #floating-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   #floating-panel:hover {
+    background: #222;
+    }    
+   #floating-help {
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding-top: 0;
+    font-size: 17px;
+    }
+   .labels {
+// transform: rotate(20deg);
+     color: black;
+     background-color: white;
+/*     font-family: "Lucida Grande", "Arial", sans-serif;*/
+     font-size: 12px;
+     font-weight: bold;
+     text-align: center;
+     width: auto;     
+     border: 2px solid black;
+     white-space: nowrap;
+     padding: 0 2px 0 2px;
+   }
+
+</style>
+</head>
+[% IF session.logged_in %]
+<body>
+
+    <div id="floating-panel">
+
+   <!--   	<input id="remove-line" class="btn btn-warning btn-sm" type="button" value="Крок (-)" />		
+      	<input id="add-line" class="btn btn-primary btn-sm" type="button" value="Лінія" />
+ -->
+[% msg %]
+	<button id="js-toast-trigger" type="button" class="btn btn-info btn-sm">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+  <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z"/>
+</svg>    
+
+	</button>    
+	<a href="/" class="btn btn-warning btn-sm">Вихід</a>
+   </div>
+
+<div id="floating-help" class="d-flex align-items-center">
+    <div id="liveToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+
+   	<div class="toast-header">
+
+		<div class="rounded me-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg>
+		</div>
+                	<strong class="me-auto">Довідка</strong>
+                	<small>Друк мапи</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    	</div>
+                        <div class="toast-body"> 
+	  Відкрити карту на весь екран.
+	Esc - відміна переносу лейби до кліку.
+	Вибрати необхідний зум.
+	Вирізати кліп "Ножницями" та зберегти в документі. 
+                                </div>
+    </div>
+</div>
+
+ <script>
+		var toastTrigger = document.getElementById('js-toast-trigger')
+		var toastLiveExample = document.getElementById('liveToast')
+	if (toastTrigger) {
+  			toastTrigger.addEventListener('click', function () {
+    			var toast = new bootstrap.Toast(toastLiveExample)
+    	toast.show()
+  	})
+}
+</script>
+
+	<div id="map"></div> 
+
+<form id="track_map" action="/print_map" method=post>
+
+<script>
+ // language="javascript">
+
+
+//var map;
+
+  	function initMap()
+
+{
+
+var map;
+var mas = [];
+var mss = [];
+let lines_sum = [];
+let table_sum = [];
+let lines_gis_s = [];
+let dist_m = [];
+var a = 0;
+var i = 0;
+
+// Вставка масиву у JavaScript код через шаблон Template Toolkit 
+
+var arr = [];
+[% FOREACH stop IN lines_gis %]
+    var obj = {};
+
+  obj.lng = [% stop.lng %],
+  obj.id_station = [% stop.id_station %],
+  obj.id_line = [% stop.id_line %],
+  obj.distance_stops = [% stop.distance_stops %],
+  obj.radio_pzz = [% stop.radio_pzz %],
+  obj.distance_line = [% stop.distance_line %],
+  obj.lat = [% stop.lat %],
+  obj.distance_line_two = [% stop.distance_line_two %]
+
+    arr.push(obj);
+
+		[% END %]
+//console.log(arr[0].id_line);
+
+[% FOREACH i = hash %]
+	mas[a] = [% i %]
+	a = a +1;
+[% END %]
+
+a = 0;
+[% FOREACH i = table %]
+        table_sum[a] = [% i %]
+        a = a +1;
+[% END %]
+
+lines_ss = arr;
+mss = JSON.parse(JSON.stringify(mas));
+var table_ss = JSON.parse(JSON.stringify(table_sum));
+
+	var path = [];
+
+var latlng = { lat: 50.74520809060286, lng: 25.319942873915547 };
+ 
+var element = document.getElementById("map");
+var options = {
+        zoom: 13,
+        center: latlng,
+};
+var map = new google.maps.Map(element, options);
+	// Область показу маркерів для центрування карти
+	var mssBounds = new google.maps.LatLngBounds();
+
+
+  const flightPlanCoordinates = [];
+
+for (i = 0; i < lines_ss.length; i += 1) {
+    flightPlanCoordinates.push(new google.maps.LatLng(lines_ss[i].lat, lines_ss[i].lng));
+}
+
+
+//const flightPlanCoordinates = [lines_ss];
+  const flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+	    editable: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 7,
+  });
+    flightPath.setMap(map);
+
+
+
+  var busMarker = new google.maps.Marker({
+    positio1n: new google.maps.LatLng(mss[0].lat, mss[0].lng),
+    map: map,
+  });
+
+var radio_pzz =0;
+var  id_station =0;
+    for (i = 0; i < lines_ss.length - 1; i++) {
+
+var dis_t = lines_ss[i+1].distance_line - lines_ss[i].distance_line;
+var dist = parseFloat(dis_t.toFixed(2));    // заокруглення до 2 зн. результат рядок то перетворюємо рядок на число
+	    if (lines_ss[i].radio_pzz != 0) {
+		    radio_pzz = lines_ss[i].radio_pzz;
+		    id_station = lines_ss[i].id_station;
+		    dist_pzz = lines_ss[i].distance_line;
+	    }
+//	    console.log('dist ='  +i, dist, 'radio_pzz = ' + radio_pzz, id_station); 
+    }
+var max_dist_line = lines_ss[i].distance_line;
+var V_mi_d = max_dist_line/3600;
+var V_mid = parseFloat(V_mi_d.toFixed(2));
+
+
+console.log('max_dist_line ='  +i, max_dist_line,' V=' + V_mid );
+
+    var c =0;
+ var previousMarker;
+    var busMarker = new google.maps.Marker({
+  		position: new google.maps.LatLng(lines_ss[0].lat, lines_ss[0].lng),
+  		map: map,
+  		icon: '/images/bus20.png'
+		});
+
+for (i = 0; i < table_ss.length - 1; i++) {
+		
+        for (j = 0; j < lines_ss.length - 1; j++) {
+
+    	if (lines_ss[j].id_station == table_ss[i].stations_id) {
+			var time_dist = table_ss[i+1].time - table_ss[i].time;
+    	//		console.log('time_dist ='  +i, time_dist, table_ss[i].time);
+
+			var segment = lines_ss[j].distance_line_two - lines_ss[j].distance_line;
+			var v_segment = segment/time_dist;
+    			var s = lines_ss[j].distance_line_two;
+    
+
+    var interest = 0;
+c=0;
+    var nextStop = lines_ss[j];
+while( s > lines_ss[j].distance_line){
+  
+					var next_segment = lines_ss[j+1].distance_line - lines_ss[j].distance_line;
+					interest = next_segment * 100 /segment;    
+					
+    					var numSteps_segment = time_dist * 1;   // 25 кадрів в сек. - це кількість анімації в сек.
+    					let  num_next_segmen_t = numSteps_segment * interest/100;   // к-сть кроків анімації на N відрізку сегмента
+					var num_next_segment = parseFloat(Math.floor(num_next_segmen_t)); // заокруглення до меншого цілого числа
+
+					                        let deltaLa_t = (lines_ss[j+1].lat - lines_ss[j].lat) / num_next_segment; // різниця між початковим та кінцевими значеннями широти
+					                        let deltaLn_g = (lines_ss[j+1].lng - lines_ss[j].lng) / num_next_segment;
+
+
+            	let lat_d = parseFloat(deltaLa_t);
+                let lng_d = parseFloat(deltaLn_g);
+
+	var nextStop = lines_ss[j];
+
+let lat_f = parseFloat(nextStop.lat);
+let lng_f = parseFloat(nextStop.lng);
+
+	var step1 = 0; // поточний крок анімації
+// запуск анімації
+animateMarker();
+
+function animateMarker() {
+  var step1 = 0;
+  var busMarker;
+
+  var intervalId = setInterval(animate, 1000);
+
+  function animate() {
+    if (step1 >= num_next_segment) {
+     clearInterval(intervalId); // Зупиняємо інтервал
+//      busMarker.setMap(null); // Видаляємо останній маркер
+      return;
+    }
+
+    if (busMarker) {
+   //   busMarker.setMap(null); // Видаляємо попередній маркер
+    }
+
+    busMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(lines_ss[0].lat, lines_ss[0].lng),
+      map: map,
+      icon: '/images/bus20.png'
+    });
+
+    lat_f = lat_f + lat_d;
+    lng_f = lng_f + lng_d;
+    lat = lat_f;
+    lng = lng_f;
+    busMarker.setPosition(new google.maps.LatLng(lat, lng));
+
+    step1++;
+  }
+}
+
+
+
+/*
+	
+	function animateMarker() {
+	while (step1 <= num_next_segment){
+
+var busMarker = new google.maps.Marker({
+  position: new google.maps.LatLng(lines_ss[0].lat, lines_ss[0].lng),
+  map: map,
+  icon: '/images/bus20.png'
+});
+    //		if (step1 <= numSteps_segment){
+
+
+    	lat_f = lat_f + lat_d;
+	lng_f = lng_f + lng_d;
+	  	lat =  lat_f;
+	  	lng =  lng_f;
+    
+//    console.log('lines_ss2 = ' + lat, lng.toFixed(10), nextStop.lat, lat_d, step1);
+
+ //console.log('j='+j, 'c=' +c, segment, 'next_segment ='+ next_segment, 'i='+ interest, lines_ss[j+1].distance_line, lines_ss[j].distance_line, 'step1='+step1, num_next_segment);
+    //'numSteps_segment=' +numSteps_segment, 'num_next_segment=' +num_next_segment, time_dist );
+
+busMarker.setPosition(new google.maps.LatLng(lat, lng));
+
+    step1++;
+              
+
+    //			}
+		}
+	}
+*/
+
+	c++;
+    	j++;
+    			}    			
+
+	}
+    }
+}
+
+
+var previousMarker;
+		  	var index = 1;
+ function moveBus(currentTime) {
+       while (table_ss[index].time-1 < currentTime) {
+      		index++;
+console.log('l_ss', index);
+    }
+    		var nextStop = lines_ss[index];
+ 	busMarker =  new google.maps.Marker({
+    		positio1n: new google.maps.LatLng(lines_ss[0].lat, lines_ss[0].lng),
+    		map: map,
+ 		icon: '/images/bus20.png',
+	});
+
+//	if ( table_ss[index].time > currentTime + 20 ) { currentTime = table_ss[index].time - 20};
+currentTime = table_ss[index].time;
+	 										
+	if (index == 0 ) { 
+		index = 1;
+	}
+console.log('lines_ss = ' + lines_ss[index].lat, lines_ss[index].lng, lines_ss[index].distance_line, lines_ss[index].distance_stops, table_ss[index].time, index);
+
+var busMarker = new google.maps.Marker({
+  position: new google.maps.LatLng(lines_ss[0].lat, lines_ss[0].lng),
+  map: map,
+  icon: '/images/bus20.png'
+});
+
+
+// розрахунок координат маркера в кожному кроці анімації
+var numSteps = 100; // кількість кроків анімації
+var step1 = 0; // поточний крок анімації
+let deltaLat = (lines_ss[index+1].lat - nextStop.lat) / numSteps; // різниця між початковим та кінцевими значеннями широти
+let deltaLng = (lines_ss[index+1].lng - nextStop.lng) / numSteps; // різниця між початковим та кінцевими значеннями довготи
+ 
+
+let lat_f = parseFloat(nextStop.lat);
+let lng_f = parseFloat(nextStop.lng);
+
+            let lat_d = parseFloat(deltaLat);
+                let lng_d = parseFloat(deltaLng);
+
+// запуск анімації
+//animateMarker();
+
+function animateMarker() {
+  if (step1 < numSteps) {
+
+lat_f = lat_f + lat_d;
+lng_f = lng_f + lng_d;
+	  lat =  lat_f;
+	  lng =  lng_f;
+//console.log('lines_ss2 = ' + lat.toFixed(10), lng.toFixed(10), deltaLat, deltaLng, step1, index);
+
+busMarker.setPosition(new google.maps.LatLng(lat, lng));
+	 //   map.panTo(busMarker.getPosition()); // змінити центр карти на положення маркера
+	    step1++;
+    setTimeout(animateMarker, 5); // час паузи між кроками анімації
+  } else {
+    busMarker.setAnimation(null); // зупинка анімації маркера
+  }
+}
+	lat = nextStop.lat;// * (nextStop.lat - lines_ss[index-1].lat);
+	lng = nextStop.lng;// * (nextStop.lng - lines_ss[index-1].lng);
+
+	 if (previousMarker) {
+  previousMarker.setMap(null);
+}
+ 
+//	 busMarker.setPosition(myLatlng);
+
+
+	    
+previousMarker = busMarker;
+
+	//	map.panTo(busMarker.getPosition()); // змінити центр карти на положення маркера									
+    currentTime++;
+    setTimeout(function() { moveBus(currentTime); }, 1200);
+  }
+  // Start the simulation
+  moveBus(0);
+
+
+
+
+var markers = [];
+for (var i = 0; i<= mss.length; i++)
+
+        {
+
+         markers[i] = new google.maps.Marker({
+                position: new google.maps.LatLng(mss[i].lat, mss[i].lng),
+                title: mss[i].name,
+                map: map,
+                buborek: mss[i].name,
+                icon: '/images/bus2_stops.png',
+        });
+	    }
+
+/*
+
+*/
+
+
+}
+
+
+
+initMap(); //initMap();   window.initialize = initMap();
+
+
+
+</script>
+
+ <!--
+-->
+
+
+
+ </form>
+</body>
+[% ELSE %]
+
+<h1>Назва шаблону: [% response.template %]</h1>
+                <div id="floating-help" class="d-flex align-items-center">
+                        <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+                                <div class="toast-header">
+
+                                        <div class="rounded me-2">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg>
+                                        </div>
+
+                        <strong class="me-auto">Довідка</strong>
+                        <small>Друк мапи</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+          На екрані приклад прорамно-створеної мапи.
+        Вам лишається лише видати на друк дане зображення маршруту.
+        Для вирішення шляхів використання системи МАК-ОМ Вам необхідно відправити реестраційні дані.
+                                <div class="mt-2 pt-2 border-top">
+        <a href="[% logout_url %]" type="button" class="btn btn-warning btn-sm">Реестрація</a>
+        <a href="[% logout_url %]" type="button" class="btn btn-dark btn-sm">Вихід</a>
+                                </div>
+                       </div>
+                </div>
+        </div>
+
+ <script>
+
+window.onload = (event) => {
+  let myAlert = document.querySelectorAll('.toast')[0];
+  if (myAlert) {
+    let bsAlert = new bootstrap.Toast(myAlert);
+    bsAlert.show();
+  }
+};
+
+ </script>
+
+
+
+                <img src="/images/52.png" class="d-block w-100" alt="...">
+
+
+
+[% END %]
+
+</html>
+

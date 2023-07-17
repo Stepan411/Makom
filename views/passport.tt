@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+[% IF session.logged_in %]
+
+<form action="/passport" method="post" accept-charset="utf-8">
+	
+	<div class="vh-100 p-3" style="background-color: #eee;">
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+
+              <center><h2>Формування паспорта: М: [% passport.1 %] Г: [% passport.2 %]</h2></center> 
+[% M = passport.1 %]
+[% G = passport.2 %]
+
+<style>
+  span {
+    display: inline-block;
+    width: 508px;
+    margin: 6px;
+    background-color: #f9f9f9;
+  }
+  </style>
+
+  <span class="border-bottom"></span>
+
+        <div class="alert alert-danger" role="alert">
+<div class="row mb-2">
+     	<center><h2>Переконайтеся що зкореговано:</h2></center>
+</div>
+<div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="option1" name="option1" value=" Графік руху">
+        <label class="form-check-label" for="option1">
+          Графіки руху
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="option2" name="option2" value=" Зачин">
+        <label class="form-check-label" for="option2">
+          Зачин
+        </label>
+      </div>
+    </div>
+</div>
+<div class="row mb-0">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck4" name="option3" value=" Зупинки">
+        <label class="form-check-label" for="option3">
+          Зупинки
+        </label>
+      </div>
+    </div>
+  </div>
+<div class="row mb-3">
+    <div class="col-sm-auto offset-sm-5">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck4" name="option4" value=" Помічено зворотню зупинку">
+        <label class="form-check-label" for="option4">
+          Помічено зворотню зупинку
+        </label>
+      </div>
+    </div>
+  </div>
+	<div class="row mb-0">
+<center><h2><p class="bg-success text-white">[% msg %]</p></h2></center>
+	</div>
+ </div>
+<center><input type="text" size="48"></center>
+
+                <div class="footer-login">
+[% IF but_fil != 1 %]
+			<input class="btn btn-primary" type="submit" value="Формувати">
+[% END %]
+			<a href="/" class="btn btn-outline-primary">Вихід</a>
+
+[% IF but_fil == 1 %]
+
+	<a href="/routes/Route_[% M %]_[% G %].xlsx" download="Маршрут_[% M %]_[% G %]">
+	<button type="button" class="btn btn-success">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+</svg>
+	Завантажити паспорт</button>
+	</a>
+
+[% END %]
+	</div>
+</div>
+</form>
+</div>
+
+ <script type="text/javascript">
+
+var GetValue = (function() {
+  function GetValue() {
+    this.init();
+    this.events();
+  }
+
+  GetValue.prototype.init = function() {
+        this.form = document.querySelector('form');
+        this.textInput = this.form.querySelector('input[type="text"]');
+        this.checkboxes = [].slice.call(this.form.querySelectorAll('input[type="checkbox"]'));
+        this.arraySelected = new Array();
+  };
+
+  GetValue.prototype.events = function() {
+        return this.checkboxes.forEach((function(_this) {
+          return function(el) {
+              return el.addEventListener('click', function() {
+                return _this.set(el);
+              });
+          };
+        })(this));
+  };
+
+  GetValue.prototype.set = function (el) {
+        if (this.arraySelected.indexOf(el.value) >= 0) {
+                this.arraySelected.splice(this.arraySelected.indexOf(el.value), 1);
+                this.textInput.value = this.arraySelected;
+        } else {
+                this.arraySelected.push(el.value)
+                this.textInput.value = this.arraySelected;
+        }
+  };
+
+  return GetValue;
+
+})();
+
+new GetValue();
+
+ </script>
+[% END %]
+</html>
+
+

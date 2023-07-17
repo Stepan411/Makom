@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+[%# IF session.logged_in %]
+<form action="/general_indicators" method="post" accept-charset="utf-8">
+ <head>
+
+<style>
+
+
+
+   table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+   }
+   td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid #000; /* Параметры рамки */
+   }
+   .my_ss, th {
+    background: #afd792; /* Цвет фона */
+    color: #333;  /* Цвет текста */
+   }
+    tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+   }
+
+   .fixedbut {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: block;
+    background: #2db700;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    }
+textarea,
+input{
+    display: block;
+    text-align: center;
+}
+
+</style>
+   <!--<div class="h-25 d-inline-block p-3" style="background-color: #eee">
+
+   -->
+</head>
+<body>
+
+<div class="vh-100" style="background-color: #eee">
+
+
+	<center>
+<div class="w-75 p-3">
+
+
+	<center><h6 class="display-6">Небезпечні ділянки</h6></center>
+
+<table>
+
+<div class="fixedbut">
+<input class="btn btn-primary" type="submit" value="Відправити">
+<a href="/" class="btn btn-warning">Вихід</a>
+</div>
+[% z  = max_id - passport.3 %]
+
+ <tr class="my_ss">
+        <th rowspan="2"><center>№ п/п</center><th rowspan="2"><center>Небезпечні ділянки</center></th><th colspan="5"><center>Місця розташування</center></th>
+
+
+ </tr>
+
+ <tr class="my_ss">
+                
+ </tr>
+   <tbody>
+ 
+    <tr>
+      <td class="table-cell" rowspan="3"><center>1</center></td>
+      <td class="table-cell">Регульовані залізничні переїзди </td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+    </tr>
+    <tr>
+      <td class="table-cell">у тому числі ті, що обладнані шлагбаумами</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+    </tr>
+    <tr>
+      <td class="table-cell">у тому числі ті, що не обладнані шлагбаумами</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+    </tr>
+
+
+	   <tr>
+        <td class="table-cell" rowspan="2"><center>2</center></td><td>З ускладненими дорожніми умовами (круті<br> спуски, повороти, обмеження видимості<br> тощо)</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+       </tr>
+        <tr><tr>
+        <td><center>3</center></td><td>Перетинання з трамвайними коліями</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+</tr>
+        <tr><tr>
+        <td><center>4</center></td><td>Концентрація дорожньо-транспортних пригод</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+</tr>
+
+	</tr>
+        <tr>
+        <td><center>5</center></td><td>Мости з вузькою проїзною частиною</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+       </tr>
+         <tr>
+        <td><center>6</center></td><td>З погіршеним дорожнім покриттям</td><td class="table-" style="width: 40%;"><center>1nnnn</center></td>
+       </tr>
+
+</form>
+
+   </tbody>
+  </table>
+
+</div>
+
+</center>
+</div>
+
+ </body>
+[%# END %]
+</form>
+</html>
+
+
+
+
+

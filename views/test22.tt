@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<!--<form action="/test22" method="post">-->
+
+<form action="" method="" accept-charset="utf-8">
+	<input type="checkbox" name="option1" value="1">
+	<input type="checkbox" name="option2" value="2">
+	<input type="checkbox" name="option3" value="3">
+	<input type="checkbox" name="option4" value="4">
+	<input type="text">
+	[% value %]
+	<input type="submit" value="Отправить">
+</form>
+ <script type="text/javascript">
+
+var GetValue = (function() {
+  function GetValue() {
+    this.init();
+    this.events();
+  }
+
+  GetValue.prototype.init = function() {
+  	this.form = document.querySelector('form');
+  	this.textInput = this.form.querySelector('input[type="text"]');
+  	this.checkboxes = [].slice.call(this.form.querySelectorAll('input[type="checkbox"]'));
+  	this.arraySelected = new Array();
+  };
+
+  GetValue.prototype.events = function() {
+  	return this.checkboxes.forEach((function(_this) {
+  	  return function(el) {
+	      return el.addEventListener('click', function() {
+	        return _this.set(el);
+	      });
+  	  };
+  	})(this));
+  };
+
+  GetValue.prototype.set = function (el) {
+  	if (this.arraySelected.indexOf(el.value) >= 0) {
+  		this.arraySelected.splice(this.arraySelected.indexOf(el.value), +1);
+  		this.textInput.value = this.arraySelected;
+  	} else {
+  		this.arraySelected.push(el.value)
+  		this.textInput.value = this.arraySelected;
+  	}
+  };
+
+  return GetValue;
+
+})();
+
+new GetValue();
+
+ </script>
+
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Check/uncheck checkboxes</title>
+</head>
+<body>
+
+
+    <p>
+        <button id="btn123">Check / Uncheck All</button>
+    </p>
+    <label for="c1"><input type="checkbox" name="color" value="red" id="c1"> Red</label>
+    <label for="c2"><input type="checkbox" name="color" value="green" id="c2"> Green</label>
+    <label for="c3"> <input type="checkbox" name="color" value="blue" id="c3">Blue</label>
+
+    <script type="text/javascript">
+        function check(checked = true) {
+            const checkboxes = document.querySelectorAll('input[name="color"]');
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = checked;
+            });
+        }
+
+        function checkAll() {
+            select();
+            this.onclick = uncheckAll;
+        }
+
+        function uncheckAll() {
+            select(false);
+            this.onclick = checkAll;
+        }
+
+        const btn = document.querySelector('#btn123');
+        btn.onclick = checkAll;
+    </script>
+
+</body>
+
+
+
+</div>
+
+
+</html>
+
+
+

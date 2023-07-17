@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+[% IF session.logged_in %]
+<form action="/arrangement_stops" method="post" accept-charset="utf-8">
+
+ <head>
+  <meta charset="utf-8">
+  <title>Таблица</title>
+  <style>
+   table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+   }
+   td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid #000; /* Параметры рамки */
+   }
+   .my_ss, th {
+    background: #afd792; /* Цвет фона */
+    color: #333;  /* Цвет текста */
+   }
+    tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+   }
+
+   .fixedbut {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
+    background: #2db700;
+    color: #fff; 
+    text-decoration: none;
+    padding: 6px 23px;
+    font-size: 17px;
+    }
+   .fixedbut:hover {
+    background: #222;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<table>
+
+<div class="fixedbut">
+	[% msg %]
+<input id="id_icd nput_check" class="btn btn-primary" type="submit" value="Відправити">
+<input type="hidden" id="id_pzz" name="id_pzz" value="0">
+<!--<a href="/audit" class="btn btn-warning">Вихід</a>-->
+<input id="id_pzz" class="btn btn-warning" type="submit" value="Вихід">
+<input type="hidden" id="id_pzz" name="id_pzz" value="1">
+
+</div>
+
+
+ <tr class="my_ss">
+ 	<th rowspan="2"><center>№ п/п</center><th rowspan="2"><center>ID</center><th rowspan="2"><center>Назви зупинок маршруту № [% passport.1 | html %] графік: [% passport.3 | html %] </center></th><th rowspan="2"><center>ПЗЗ</center><th colspan="5"><center>Обладнання зупинок</center></th>  
+
+
+ </tr>
+ <tr class="my_ss">
+ 		<th><center>автостанція</center></th><th><center>павільйон</center></th><th><center>навіс</center></th><th><center>лава</center></th><th><center>екран</center></th>
+ </tr>
+   <tbody>
+
+[% n = 0 %]
+[% FOREACH id = ss2.keys.nsort %]
+
+ 	<tr>
+	<td>[% n = n +1 %]<center> [% n %]</center></td><td><center>[% ss2.$id.id_station %]</td><td></center>[% ss2.$id.name | html %]</td><td>
+
+
+
+
+<div> <center>
+
+
+<input name="radio_pzz_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.radio_pzz == 0 %]
+>
+[% ELSIF ss2.$id.radio_pzz == 1 %]
+checked>
+[% END %]
+
+</div></center>
+</td><td>
+
+
+
+
+	<div> <center>
+  		<input onclick="check1_[% ss2.$id.id %]()" id="avto_stops_[% ss2.$id.id %]" name="avto_stops_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.avto_stops == 0 %]
+>
+[% ELSIF ss2.$id.avto_stops == 1 %] 
+checked>
+[% END %]
+	</div></center>
+
+	</td><td><center>
+	<div>
+		<input name="pavilion_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.pavilion == 0 %]
+>
+[% ELSIF ss2.$id.pavilion == 1 %]
+checked>
+[% END %]
+
+	</div></center>
+	</td><td><center>
+	<div>
+  		<input id="navis_[% ss2.$id.id %]" name="navis_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.navis == 0 %]
+>
+[% ELSIF ss2.$id.navis == 1 %]
+checked>
+[% END %]
+
+	</div></center>
+	</td><td><center>
+	<div>
+  	<input id="lava_[% ss2.$id.id %]" name="lava_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.lava == 0 %]
+>
+[% ELSIF ss2.$id.lava == 1 %]
+checked>
+[% END %]
+	</div></center>
+	</td><td><center>
+	<div>
+  		<input id="ekran_[% ss2.$id.id %]" name="ekran_[% ss2.$id.id %]" class="form-check-input" type="checkbox" value="1" aria-label="..."
+[% IF ss2.$id.ekran == 0 %]
+>
+[% ELSIF ss2.$id.ekran == 1 %]
+checked>
+[% END %]
+
+	</div> </center>
+	</td>
+    	</tr>
+
+[% END %]
+
+</form>
+
+   </tbody>
+  </table>
+ </body>
+[% END %]
+</html>
+

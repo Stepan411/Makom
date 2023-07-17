@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+[% IF session.logged_in %]
+<html>
+<style>
+	.ssfon {
+    position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  align-items: center;
+  z-index: 9999;
+}
+</style>
+
+	<form action="synchronization" method="post" accept-charset="utf-8">
+
+<script>
+    function load()
+    {
+    window.location.href = "/synchron";
+    }
+</script>
+
+
+
+<div class="shadow-lg p-3 mb-5 bg-white rounded ssfon">
+  		<h1>Синхронізація</h1>
+	<div class="alert alert-danger" role="alert">
+		<center> Увага. Буде зроблена синхронізація баз даних та поновлено таблиці. Зверніть увагу на базу даних (БД) обладнання зупинок Вам потрібно зробити вибір:
+		<center> 1. Залишити БД обладнання зупинок - зберігається все обладнання яке Ви ввели до цієї cинхронізації;</center>
+		<center> 2. Очистити БД зупинок - очищується вся БД обладнання зупинок. Це потрібно робити тоді коли Ви повністю оновляли зупинки в МАК. </center>
+  		<center>Натисніть відповідально, що бажаєте.</center>
+
+        		<div class="col">
+				<select class="form-select" aria-label="Default select example" name="val_select">
+  					<option value="1">1. Залишити БД обладнання зупинок</option>
+  					<option value="2">2. Очистити БД обладнання зупинок</option>
+ 				</select>
+           		</div>
+	</div>
+       	<div class="footer-login">
+		<input class="btn btn-primary" onclick="document.location='/synchron'" type="submit" value="Синхронізація">
+		<a href="/" class="btn btn-outline-primary">Вихід</a>
+	</div>
+</div>
+</form>
+</html>
+[% END %]

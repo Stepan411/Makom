@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+
+<body>
+Our varibles: [% scalar %], [% list.0 %], [% list.1 %], [% hash.key %]
+Time: [% code %]
+User: [% cgi.param('user') %]
+	</body>
+

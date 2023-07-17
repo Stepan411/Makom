@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+setTimeout(function(e){
+  $('button').trigger('click');
+}, 100);
+
+</script>
+
+<style>
+ .but_ss {
+  display: none;
+  }
+ .but_ss:hover {
+  display: block;
+  }
+</style>
+
+ 	<div class="but_ss">
+<!--  Button trigger modal
+document.getElementById('but_ss').style.visibility="hidden";
+document.getElementById("but_ss").style.display="none";
+q
+q
+display: none;
+<button type="button" href="/mapa" class="btn btn-primary">Будувати</button>
+ -->
+
+<button onclick="function(e)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Побудова  та редагування трека маршруту</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Будьте уважні. Вибір меню
+"Будувати" знищує трек маршруту якщо побудований.  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Вийти</button>
+	<a class="btn btn-success" href="/edit_map" role="button">Редагувати</a>
+        <a class="btn btn-primary" href="/mapa" role="button">Будувати</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
