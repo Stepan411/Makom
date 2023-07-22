@@ -936,8 +936,8 @@ if ( request->method() eq "POST" ) {
 	my $date_t = body_parameters->get('date');
 
 
-	print "select_regime = $select_regime  \n";
-print "date_t = $date_t  \n";
+	#	print "select_regime = $select_regime  \n";
+	#print "date_t = $date_t  \n";
 
 
 	my $str_pol = $police;
@@ -993,20 +993,18 @@ print "date_t = $date_t  \n";
 
         my $month_name = $date_obj->strftime("%B");
 
-        print "month_name = $month_name, title[7] = $title[7]  \n"; # виведе "березень"
-
-
-
-
-print "date_t999 = $date_t  \n";
-print "month_name999 = $month_name  \n";
+	#        print "month_name = $month_name, title[7] = $title[7]  \n"; # виведе "березень"
+	#print "date_t999 = $date_t  \n";
+	#print "month_name999 = $month_name  \n";
         my  $sth =  $db->prepare("UPDATE title SET police = ?, organizer = ?, number = ?, route_type = ?, regime = ?, date = ?, month_name = ? WHERE id = 1");
             $sth->execute($police, $organizer, $passport_number, $select_type, $select_regime, $date_t, $month_name ) or die $db->errstr;
+
+	    #chmod +x /root/Makom/views/title_xlsl.pl;	    
 system('/root/Makom/views/title_xlsl.pl');
 system("cp /root/Makom/Title_$passport[1].xlsx /root/Makom/public/routes/");
 system("rm /root/Makom/Title_$passport[1].xlsx");                                                # знищити файл
  $set_finish = 1;
-print "set_finish = $set_finish  \n";
+ #print "set_finish = $set_finish  \n";
 
 #	    redirect '/';
     }

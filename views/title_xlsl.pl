@@ -31,8 +31,8 @@ $dbh->do("SET NAMES 'utf8'");
         $sql->finish;
 
 	
-	print "title1 = $title[1]\n";
-print "passport = $passport[1]\n";
+	#	print "title1 = $title[1]\n";
+	#print "passport = $passport[1]\n";
 #--------- ---------------- ------------------------------
 my $workbook  = Excel::Writer::XLSX->new("Title_$passport[1].xlsx");
 
@@ -153,7 +153,7 @@ $worksheet->merge_range('H13:I13', 'М.П.', $format3);
 $worksheet->merge_range('D14:G14', '"___"______________202_року', $format1);
 $worksheet->merge_range('H14:K14', '"___"______________202_року', $format1);
 
-$worksheet->merge_range('F22:I22', "ПАСПОРТ № $title[3]", $format3);
+$worksheet->merge_range('E22:J22', "ПАСПОРТ № $title[3]", $format3);
 
 $worksheet->merge_range('D24:K24', "АВТОБУСНОГО МАРШРУТУ РЕГУЛЯРНИХ ПЕРЕВЕЗЕНЬ", $format10);
 	my $select_type = ();
@@ -186,7 +186,7 @@ $worksheet->merge_range('D28:E28', "який працює", $format1);
 $worksheet->merge_range('F29:K29', '(у звичайнрму режимі', $format);
 $worksheet->merge_range('D31:K31', 'експресному режимі чи режимі маршрутного таксі)', $format);
 
-print "passport = $passport[2]\n";
+#print "passport = $passport[2]\n";
 
 
 $worksheet->merge_range('D32:F32', "Назва маршруту", $format1);
@@ -197,7 +197,7 @@ $worksheet->merge_range('D39:F39', "Паспорт розробленй", $forma
 
 my $t = $title[6];
 my $year = substr($t, 0, 4);
-my $month => substr($t, 5, 2);
+#my $month => substr($t, 5, 2);
 my $day = substr($t, 8, 2);
 
 $worksheet->merge_range('D41:F41', "$day .$title[7]. $year року", $format1);
